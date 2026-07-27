@@ -1,0 +1,216 @@
+/* Reference-specific icon geometry: avoid glyph substitutions and keep all
+   navigation affordances on the same optical grid. */
+.ico { display:inline-block; width:16px; height:16px; vertical-align:middle; }
+.hamb .ico { width:21px; height:21px; }
+.nav > span:not(.nav-label) { display:none; }
+.nav .nav-ico { width:18px; min-width:18px; height:18px; }
+.nav .nav-label { width:auto; font-size:12px; line-height:1.25; text-align:left; font-weight:inherit; }
+.nav .nav-chevron { margin-left:auto; width:14px; height:14px; }
+.group { display:flex; align-items:center; justify-content:space-between; }
+.group svg { color:#171717; }
+.profile > svg { margin-left:auto; }
+.head-right > .ico { width:22px; height:22px; }
+.refresh .ico { width:14px; height:14px; margin-right:4px; }
+.notice .ico { width:15px; height:15px; }
+.drop .ico { width:27px; height:27px; }
+.file .ico, .rail-card p .ico { width:14px; height:14px; }
+
+/* The desktop reference presents all eight workflow stages in the initial
+   viewport; retain the light horizontal scroll only as a fallback. */
+.stepper {
+  display:flex;
+  gap:0;
+  overflow:hidden;
+}
+.step {
+  flex:1 1 0;
+  width:0;
+  min-width:0;
+  padding-right:12px;
+}
+.step:nth-child(1) { flex-grow:1.06; }
+.step:nth-child(2) { flex-grow:.98; }
+.step:nth-child(3) { flex-grow:1.22; }
+.step:nth-child(4) { flex-grow:1.05; }
+.step:nth-child(5) { flex-grow:.96; }
+.step:nth-child(6) { flex-grow:1.14; }
+.step:nth-child(7) { flex-grow:1.05; }
+.step:nth-child(8) { flex-grow:.92; padding-right:0; }
+.step b { max-width:132px; }
+.step i { position:absolute; right:1px; color:#555; font-size:15px; }
+.step:last-child i { display:none; }
+
+@media (max-width: 1100px) {
+  .stepper { display:flex; gap:10px; overflow-x:auto; }
+  .step { min-width:145px; }
+  .step i { position:static; }
+}
+
+/* Restore the compact desktop control scale used by the supplied reference. */
+.form-card { padding:11px; border-radius:6px; }
+.rail-card { padding:13px; border-radius:6px; }
+.section h3 { margin-bottom:11px; font-size:11px; font-weight:700; }
+.section label { margin-bottom:5px; font-size:10px; font-weight:400; }
+input, select, textarea { height:27px; padding:6px 8px; border-radius:4px; font-size:11px; }
+textarea { height:69px; }
+.notice { height:32px; min-height:32px; padding:0 11px; margin-bottom:11px; }
+.project > select { margin-bottom:8px; }
+.summary { padding:11px 10px; }
+.metadata { gap:13px 6px; }
+.metadata-title { margin:10px 0 9px; }
+.form-grid { gap:6px; }
+.drop { height:75px; }
+.drop .ico { width:27px; height:27px; }
+.file { height:45px; }
+.tag-select, .tag-input { min-height:29px; border-radius:4px; }
+.tag-select span, .tag-input span { min-height:0; padding:3px 7px; }
+.tag-notes .tag-input { height:54px; }
+.rail-card h3 { margin-bottom:13px; font-size:11px; font-weight:700; }
+.rail-card p { margin-bottom:13px; font-size:10px; }
+.help button { height:33px; }
+
+.nav, .step { cursor:pointer; }
+.nav:focus-visible, .step:focus-visible { outline:2px solid #078541; outline-offset:2px; }
+
+.project > button.refresh { display:flex; align-items:center; gap:6px; white-space:nowrap; }
+.project > button.refresh .ico.refresh {
+  position:static;
+  inset:auto;
+  width:14px;
+  height:14px;
+  margin:0;
+  flex:none;
+}
+.project-icon svg { width:18px; height:18px; stroke-width:1.6; }
+.rail-card p .check, .rail-card p .document { color:#078541; stroke-width:1.5; flex:none; }
+.tag-notes .tag-input { flex-wrap:nowrap; overflow-x:auto; align-content:center; }
+.tag-notes .tag-input span { flex:none; white-space:nowrap; }
+.tag-notes .tag-input input { min-width:126px; flex:1 0 126px; }
+
+/* Prevent intrinsic tag/control widths from taking space from adjacent fields. */
+.form-grid { grid-template-columns:minmax(0, 1fr) minmax(0, 1.04fr); }
+.form-grid > *, .two > *, .three > * { min-width:0; }
+.two { grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); }
+.three { grid-template-columns:repeat(3, minmax(0, 1fr)); }
+.tag-notes { display:flex !important; flex-flow:row nowrap; gap:20px; align-items:flex-start; }
+.tag-notes > :first-child { flex:1 1 60%; min-width:0; }
+.tag-notes > :last-child { flex:0 1 40%; min-width:0; }
+
+/* Tags in the reference are chips on one line with the entry hint underneath,
+   rather than a horizontally scrolling multi-select box. */
+.tag-notes .tag-input { height:auto; min-height:0; padding:0; border:0; border-radius:0; overflow:visible; display:flex; flex-wrap:wrap; gap:4px; align-content:flex-start; }
+.tag-notes .tag-input span { padding:3px; white-space:nowrap; }
+.tag-notes .tag-input input { flex:0 0 100%; min-width:0; width:100%; height:18px; padding:0; margin-top:0; border:0; background:transparent; }
+.tag-notes textarea { min-width:0; }
+
+/* The reference keeps Tags unframed: one outer section card, chips, then a
+   plain text-entry hint. The Notes textarea is the only nested field box. */
+.tag-notes .tag-input {
+  border:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  min-height:0 !important;
+}
+.tag-notes .tag-input input {
+  border:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  color:#666;
+}
+
+/* The reference renders project metadata as a distinct soft sub-panel. */
+.metadata-title {
+  margin:6px 0 0;
+  padding:9px 10px 0;
+  border:1px solid #e1e4e5;
+  border-bottom:0;
+  border-radius:5px 5px 0 0;
+  background:#fafbfb;
+}
+.metadata {
+  padding:8px 10px 10px;
+  border:1px solid #e1e4e5;
+  border-top:0;
+  border-radius:0 0 5px 5px;
+  background:#fafbfb;
+}
+
+/* Compact form rhythm measured against the 1536×1024 reference capture. */
+.form-grid .form-card { padding:8px 10px; }
+.form-grid .section h3 { margin-bottom:8px; }
+.form-grid .section label { margin-bottom:4px; }
+.form-grid .three { margin-top:8px; }
+.upload-note { margin:6px 0 0; line-height:12px; }
+.upload-note i, footer i {
+  display:inline-block;
+  height:11px;
+  margin:0 10px;
+  border-left:1px solid #bbb;
+  vertical-align:middle;
+}
+
+/* Final viewport measurements against the supplied 1536×1024 artwork. */
+.brand { gap:35px; }
+.logo { font-size:40px; line-height:32px; }
+.project { margin-bottom:3px; }
+.form-grid > .form-card:nth-child(2) { padding-bottom:4px; }
+.upload-note { margin-top:3px; }
+.tag-notes .tag-input span { padding-left:5px; padding-right:5px; }
+
+.avatar {
+  font-size:0;
+  background-image:url('/avatar.svg');
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+.tag-notes .tag-input span { padding-left:3px; padding-right:3px; }
+
+/* Compact workflow: stages must scroll, never shrink into each other. */
+@media (max-width:1100px) {
+  .stepper {
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x proximity;
+  }
+  .step {
+    flex:0 0 190px;
+    width:190px;
+    min-width:190px;
+    padding-right:22px;
+    scroll-snap-align:start;
+  }
+  .step:nth-child(3),
+  .step:nth-child(6),
+  .step:nth-child(7) {
+    flex-basis:210px;
+    width:210px;
+    min-width:210px;
+  }
+  .step b {
+    max-width:124px;
+    flex:0 1 124px;
+  }
+  .step i {
+    position:absolute;
+    right:1px;
+    margin:0;
+  }
+}
+
+/* Wide desktop: use the extra width as real separation between stages. */
+@media (min-width:1600px) {
+  .stepper { gap:8px; }
+  .step { padding-right:22px; }
+  .step i { right:2px; }
+  .step b { padding-right:5px; }
+}
+
+/* Keep the desktop reference density at its intended 1536px viewport. */
+@media (min-width: 1200px) and (max-height: 1050px) {
+  .nav-scroll { padding-top:24px; padding-bottom:12px; }
+  .nav { height:40px; }
+  .side-bottom { padding-top:8px; }
+}
