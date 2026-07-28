@@ -222,41 +222,61 @@ export function ScreenSpecificationWorkspace({
             <h3 className="spec-panel-title">DATA FLOW DIAGRAM</h3>
 
             <div className="spec-flow-container">
-              <div className="spec-flow-diagram">
-                {/* Left DB */}
-                <div className="spec-flow-node-db">
-                  <div className="spec-db-icon-wrap">
-                    <Database size={18} />
+              <div className="spec-flow-canvas">
+                {/* Database Cylinder */}
+                <div className="spec-db-cylinder">
+                  <svg viewBox="0 0 60 70" width="46" height="54">
+                    <path d="M 5,15 C 5,5 55,5 55,15 L 55,55 C 55,65 5,65 5,55 Z" fill="#e8f5ec" stroke="#078541" strokeWidth="2" />
+                    <ellipse cx="30" cy="15" rx="25" ry="10" fill="#dcfce7" stroke="#078541" strokeWidth="2" />
+                    <path d="M 5,28 C 5,38 55,38 55,28" fill="none" stroke="#078541" strokeWidth="1.5" strokeDasharray="3 2" />
+                    <path d="M 5,42 C 5,52 55,52 55,42" fill="none" stroke="#078541" strokeWidth="1.5" strokeDasharray="3 2" />
+                  </svg>
+                  <div className="spec-db-label">
+                    <strong>GSolve</strong>
+                    <span>Database</span>
                   </div>
-                  <span>GSolve Database</span>
                 </div>
 
-                {/* Connector 1 */}
-                <div className="spec-flow-connector">
-                  <span className="spec-connector-line" />
-                  <span className="spec-connector-label">API Layer<br /><small style={{ fontWeight: 'normal', color: '#757b84' }}>(GSolve APIs)</small></span>
+                {/* Arrow 1 */}
+                <div className="spec-arrow-horizontal">&rarr;</div>
+
+                {/* Box 1: API Layer */}
+                <div className="spec-node-box">
+                  <strong>API Layer</strong>
+                  <small>(GSolve APIs)</small>
                 </div>
 
-                {/* Center Column */}
-                <div className="spec-flow-center-col">
-                  <div className="spec-flow-node-sub">Authentication Service</div>
-                  <div className="spec-flow-arrow-vert" />
-                  <div className="spec-flow-node-main">
+                {/* Arrow 2 */}
+                <div className="spec-arrow-horizontal">&rarr;</div>
+
+                {/* Center Column Stack */}
+                <div className="spec-center-stack">
+                  <div className="spec-node-box">
+                    <strong>Authentication</strong>
+                    <span>Service</span>
+                  </div>
+
+                  <div className="spec-arrow-vertical">&updownarrow;</div>
+
+                  <div className="spec-node-box main">
                     <strong>GX1-S4</strong>
                     <span>Task Dashboard</span>
                   </div>
-                  <div className="spec-flow-arrow-vert" />
-                  <div className="spec-flow-node-sub">Notifications Service</div>
+
+                  <div className="spec-arrow-vertical">&updownarrow;</div>
+
+                  <div className="spec-node-box">
+                    <strong>Notifications</strong>
+                    <span>Service</span>
+                  </div>
                 </div>
 
-                {/* Connector 2 */}
-                <div className="spec-flow-connector">
-                  <span className="spec-connector-line" />
-                </div>
+                {/* Arrow 3 */}
+                <div className="spec-arrow-horizontal">&leftrightarrow;</div>
 
-                {/* Right UI Node */}
-                <div className="spec-flow-node-sub">
-                  <span>UI Components</span>
+                {/* Box 3: UI Components */}
+                <div className="spec-node-box">
+                  <strong>UI Components</strong>
                   <small>(React / Mantine)</small>
                 </div>
               </div>
