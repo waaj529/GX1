@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { AlertCircle, AlertTriangle, ArrowRight, BarChart3, Bell, CalendarDays, Check, CheckCircle2, ChevronDown, CircleHelp, ClipboardList, Cloud, Code2, Copy, Edit3, ExternalLink, FileCheck2, FileText, Filter, Flag, Gauge, Headphones, Info, LayoutGrid, Menu, Monitor, PanelsTopLeft, RefreshCw, Rocket, Save, Search, Settings, Shield, ShieldCheck, Tag, Trash2, UploadCloud, Workflow, X } from 'lucide-react';
 import './requirement-normalisation/norm.css';
 import { LayoutRecommendationWorkspace } from './layout-recommendation/LayoutRecommendationWorkspace';
+import { ScreenSpecificationWorkspace } from './screen-specification/ScreenSpecificationWorkspace';
 
 // ─── shared primitives (unchanged from original) ──────────────────────────────
 const steps = ['BRD Intake & Registration','Requirement Normalisation','Layout & Component Recommendation','GX1 Screen Specification','Prototype (Penpot)','Front-End Code Generation','QA, Evidence & Approval','Release & Deployment'];
@@ -233,14 +234,13 @@ function ReqNormWorkspace({setMessage}:{setMessage:(m:string)=>void}) {
 // ─── ROOT PAGE ────────────────────────────────────────────────────────────────
 export default function Home(){
  const {register,handleSubmit,watch,formState:{errors}}=useForm<FormData>({defaultValues:{title:'Daily Task Management System',description:'System to manage daily tasks, assignments, tracking and approvals.',notes:'This is part of GSolve pilot phase 1.',assignee:'UX-CX Lead (Jahir Hussain)'}});
- const [reviewers,setReviewers]=useState(['AI Architect (Zain Israr)','System Architect']); const [tags,setTags]=useState(['Task Management','Operations','GSolve Pilot']); const [tag,setTag]=useState(''); const [file,setFile]=useState('Daily_Task_Management_BRD_v1.0.pdf'); const [message,setMessage]=useState(''); const [activeStep,setActiveStep]=useState(2); const [activeNav,setActiveNav]=useState(5); const input=useRef<HTMLInputElement>(null);
+ const [reviewers,setReviewers]=useState(['AI Architect (Zain Israr)','System Architect']); const [tags,setTags]=useState(['Task Management','Operations','GSolve Pilot']); const [tag,setTag]=useState(''); const [file,setFile]=useState('Daily_Task_Management_BRD_v1.0.pdf'); const [message,setMessage]=useState(''); const [activeStep,setActiveStep]=useState(3); const [activeNav,setActiveNav]=useState(6); const input=useRef<HTMLInputElement>(null);
  const addTag=(e:React.KeyboardEvent<HTMLInputElement>)=>{if(e.key==='Enter'){e.preventDefault();const x=tag.trim();if(x&&!tags.some(t=>t.toLowerCase()===x.toLowerCase()))setTags([...tags,x]);setTag('')}};
  const choose=(f?:File)=>{if(!f)return;if(f.size>50*1024*1024||!/(pdf|vnd.openxmlformats-officedocument.wordprocessingml.document)$/.test(f.type))setMessage('Please choose a PDF or DOCX file under 50 MB.');else {setFile(f.name);setMessage('Document attached successfully.')}};
  const submit=(kind:string)=>handleSubmit((data)=>{const check=schema.safeParse(data);setMessage(check.success?`${kind} saved successfully.`:'Please complete all required fields.');})();
  
  const getHeaderSubtitle = () => {
    if (activeStep === 1) return 'Requirement Normalisation Workbench';
-   if (activeStep === 2) return 'From BRD Intake to Production-Ready Front-End & Evidence';
    return 'From BRD Intake to Production-Ready Front-End & Evidence';
  };
 
@@ -250,13 +250,15 @@ export default function Home(){
     if(x===0||x===1) setActiveStep(0);
     if(x===2) setActiveStep(1);
     if(x===5) setActiveStep(2);
-  }} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setActiveNav(x)}}} className={'nav '+(x===activeNav?'active selected ':'')+(x>=2&&x<=5?'sub ':'') }><NavIcon name={i}/><span className="nav-label">{name}</span>{[0,1,6,7,8,9,10].includes(x)&&<ChevronDown className="nav-chevron" size={14}/>}</div>)}<div className="admin"><p className="group">ADMINISTRATION</p><div className="nav"><Settings className="nav-ico" size={18}/><span className="nav-label">Admin</span><ChevronDown className="nav-chevron" size={14}/></div><div className="nav"><BarChart3 className="nav-ico" size={18}/><span className="nav-label">Reports</span><ChevronDown className="nav-chevron" size={14}/></div></div></div><div className="side-bottom"><div className="context"><b>Project Context (GSolve)</b><span>GSOLVE-PILOT-001 <I n="ext"/></span></div><div className="profile"><div className="avatar">RS</div><div><b>Rohit Sharma</b><small>Business Analyst</small></div><ChevronDown size={14}/></div></div></aside>
+    if(x===6) setActiveStep(3);
+  }} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setActiveNav(x)}}} className={'nav '+(x===activeNav?'active selected ':'')+(x>=2&&x<=6?'sub ':'') }><NavIcon name={i}/><span className="nav-label">{name}</span>{[0,1,7,8,9,10].includes(x)&&<ChevronDown className="nav-chevron" size={14}/>}</div>)}<div className="admin"><p className="group">ADMINISTRATION</p><div className="nav"><Settings className="nav-ico" size={18}/><span className="nav-label">Admin</span><ChevronDown className="nav-chevron" size={14}/></div><div className="nav"><BarChart3 className="nav-ico" size={18}/><span className="nav-label">Reports</span><ChevronDown className="nav-chevron" size={14}/></div></div></div><div className="side-bottom"><div className="context"><b>Project Context (GSolve)</b><span>GSOLVE-PILOT-001 <I n="ext"/></span></div><div className="profile"><div className="avatar">RS</div><div><b>Rohit Sharma</b><small>Business Analyst</small></div><ChevronDown size={14}/></div></div></aside>
   <main className="app"><header><div><h1>GX1 – BRD to Production Platform</h1><p>{getHeaderSubtitle()}</p></div><div className="head-right"><span className="bell"><I n="bell"/><b>12</b></span><I n="help"/><div className="avatar large">RS</div><div><strong>Rohit Sharma</strong><small>Business Analyst</small></div><span>⌄</span><div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginLeft: '4px' }}><span className="gx-logo-badge" style={{ margin: 0 }}>GREEN</span><span style={{ fontSize: '8px', color: '#078541', fontStyle: 'italic', fontWeight: 600 }}>Future: Envisioned</span></div></div></header>
    <div className="body"><nav className="stepper" aria-label="Workflow steps">{steps.map((s,i)=><div role="button" tabIndex={0} aria-current={i===activeStep?'step':undefined} onClick={()=>{
      setActiveStep(i);
      if (i === 0) setActiveNav(0);
      if (i === 1) setActiveNav(2);
      if (i === 2) setActiveNav(5);
+     if (i === 3) setActiveNav(6);
    }} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setActiveStep(i)}}} className={'step '+(i===activeStep?'current':i<activeStep?'completed':'')} key={s}><span>{i<activeStep?<Check size={14} strokeWidth={2.5}/>:i+1}</span><b>{s}</b>{i<7&&<i>→</i>}</div>)}</nav>
 
    {/* ── STEP 1: BRD Intake ── */}
@@ -276,15 +278,27 @@ export default function Home(){
        onMsg={setMessage}
        onNextStep={() => {
          setActiveStep(3);
+         setActiveNav(6);
          setMessage('Proceeding to Step 4: GX1 Screen Specification...');
        }}
      />
    )}
 
-   {/* ── STEPS 4-8: placeholder ── */}
-   {activeStep>2&&<div className="content"><div className="workspace"><div className="title"><h2>{steps[activeStep]}</h2><p>This step is coming soon.</p></div></div></div>}
+   {/* ── STEP 4: GX1 Screen Specification ── */}
+   {activeStep===3&&(
+     <ScreenSpecificationWorkspace
+       onMsg={setMessage}
+       onNextStep={() => {
+         setActiveStep(4);
+         setMessage('Proceeding to Step 5: Prototype (Penpot)...');
+       }}
+     />
+   )}
+
+   {/* ── STEPS 5-8: placeholder ── */}
+   {activeStep>3&&<div className="content"><div className="workspace"><div className="title"><h2>{steps[activeStep]}</h2><p>This step is coming soon.</p></div></div></div>}
 
    </div>
-   <footer><span>GX1 Platform <i/> Confidential – Internal Use Only</span><b>Classification: Internal &amp; Confidential</b><div>{activeStep===1?<><button onClick={()=>setMessage('Returned to Intake Notes.')}>← Return to Intake Notes</button><button className="submit" onClick={()=>setMessage('Submitted for review.')}>Submit for Review &nbsp; →</button></>:activeStep===2?<><button onClick={()=>setActiveStep(1)}>← Previous Step</button><button className="submit" onClick={()=>{setMessage('Layout & Component recommendations confirmed!');setActiveStep(3);}}>Confirm &amp; Continue &nbsp; →</button></>:<><button onClick={()=>submit('Draft')}><I n="save"/> Save as Draft</button><button className="submit" onClick={()=>submit('BRD')}>Submit for Processing &nbsp; →</button></>}</div><span>© GREEN Limited 2026. All rights reserved.</span></footer>{message&&<div role="status" className="toast">{message}<button onClick={()=>setMessage('')}>×</button></div>}</main></div>
+   <footer><span>GX1 Platform <i/> Confidential – Internal Use Only</span><b>Classification: Internal &amp; Confidential</b><div>{activeStep===1?<><button onClick={()=>setMessage('Returned to Intake Notes.')}>← Return to Intake Notes</button><button className="submit" onClick={()=>setMessage('Submitted for review.')}>Submit for Review &nbsp; →</button></>:activeStep===2?<><button onClick={()=>{setActiveStep(1);setActiveNav(2);}}>← Previous Step</button><button className="submit" onClick={()=>{setMessage('Layout & Component recommendations confirmed!');setActiveStep(3);setActiveNav(6);}}>Confirm &amp; Continue &nbsp; →</button></>:activeStep===3?<><button onClick={()=>{setActiveStep(2);setActiveNav(5);}}>← Previous Step</button><button className="submit" onClick={()=>{setMessage('Screen Specification saved!');setActiveStep(4);}}>Save Specification &nbsp; →</button></>:<><button onClick={()=>submit('Draft')}><I n="save"/> Save as Draft</button><button className="submit" onClick={()=>submit('BRD')}>Submit for Processing &nbsp; →</button></>}</div><span>© GREEN Limited 2026. All rights reserved.</span></footer>{message&&<div role="status" className="toast">{message}<button onClick={()=>setMessage('')}>×</button></div>}</main></div>
 }
 function Rail({title,rows,squared=false}:{title:string,rows:string[],squared?:boolean}){return <div className="rail-card"><h3>{title}</h3>{rows.map(x=><p key={x}><I n={squared?'document':'check'}/>{x}</p>)}</div>}

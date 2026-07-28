@@ -1,0 +1,225 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Step 4: GX1 Screen Specification — Scoped Styles
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 2x2 Panels Grid ─────────────────────────────────────────────────────── */
+.spec-workspace-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.spec-panel {
+  background: #fff;
+  border: 1px solid #e1e4e5;
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.spec-panel-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #171717;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Tables ──────────────────────────────────────────────────────────────── */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+  margin-bottom: 8px;
+}
+
+.spec-table th {
+  text-align: left;
+  padding: 5px 6px;
+  font-weight: 600;
+  color: #50545b;
+  border-bottom: 1px solid #e1e4e5;
+  background: #fafbfb;
+  white-space: nowrap;
+}
+
+.spec-table td {
+  padding: 5px 6px;
+  border-bottom: 1px solid #f0f2f2;
+  vertical-align: middle;
+  line-height: 1.35;
+}
+
+.spec-num-col {
+  color: #757b84;
+  width: 18px;
+}
+
+.spec-font-mono {
+  font-family: monospace, sans-serif;
+  font-size: 10px;
+  color: #171717;
+  font-weight: 600;
+}
+
+.spec-yes-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.spec-no-badge {
+  display: inline-block;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.spec-check-icon {
+  color: #078541;
+}
+
+.spec-panel-footer-btn {
+  width: 100%;
+  margin-top: auto;
+  padding: 6px 0;
+  border: 1px solid #e1e4e5;
+  border-radius: 4px;
+  background: #fafbfb;
+  color: #171717;
+  font-size: 10.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.spec-panel-footer-btn:hover {
+  background: #f4f5f5;
+  border-color: #bfc4c7;
+}
+
+/* ── Data Flow Diagram ───────────────────────────────────────────────────── */
+.spec-flow-container {
+  height: 220px;
+  background: #fafbfb;
+  border: 1px dashed #d7dbdd;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.spec-flow-diagram {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.spec-flow-node {
+  background: #fff;
+  border: 1px solid #d7dbdd;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #171717;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  z-index: 2;
+}
+
+.spec-flow-node.highlight {
+  border: 1.5px solid #078541;
+  background: #e8f5ec;
+  color: #078541;
+}
+
+.spec-flow-db {
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border: 1px solid #078541;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+  font-weight: 600;
+  color: #078541;
+}
+
+.spec-flow-arrows-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Right Rail Cards ────────────────────────────────────────────────────── */
+.spec-score-box {
+  background: #f0faf4;
+  border: 1px solid #c9dfcf;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.spec-score-box span {
+  font-size: 11px;
+  font-weight: 600;
+  color: #171717;
+}
+.spec-score-val {
+  font-size: 16px;
+  font-weight: 800;
+  color: #078541;
+}
+
+.spec-action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.spec-action-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: #171717;
+  text-decoration: none;
+  cursor: pointer;
+}
+.spec-action-item:hover {
+  color: #078541;
+}
