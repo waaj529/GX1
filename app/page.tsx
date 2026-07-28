@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { AlertCircle, AlertTriangle, ArrowRight, BarChart3, Bell, CalendarDays, Check, CheckCircle2, ChevronDown, CircleHelp, ClipboardList, Cloud, Code2, Copy, Edit3, ExternalLink, FileCheck2, FileText, Filter, Flag, Gauge, Headphones, Info, LayoutGrid, Menu, Monitor, PanelsTopLeft, RefreshCw, Rocket, Save, Search, Settings, Shield, ShieldCheck, Tag, Trash2, UploadCloud, Workflow, X } from 'lucide-react';
 import './requirement-normalisation/norm.css';
+import { LayoutRecommendationWorkspace } from './layout-recommendation/LayoutRecommendationWorkspace';
 
 // ─── shared primitives (unchanged from original) ──────────────────────────────
 const steps = ['BRD Intake & Registration','Requirement Normalisation','Layout & Component Recommendation','GX1 Screen Specification','Prototype (Penpot)','Front-End Code Generation','QA, Evidence & Approval','Release & Deployment'];
@@ -60,7 +61,7 @@ function ReqNormWorkspace({setMessage}:{setMessage:(m:string)=>void}) {
       {/* Project Banner */}
       <div className="proj-banner">
         <div className="proj-banner-left">
-          <span className="proj-icon"><ClipboardList size={16}/></span>
+          <span className="proj-icon"><FileText size={16}/></span>
           <div><b>GSolve Project</b><span>GSOLVE-PILOT-001</span></div>
           <div className="proj-sep"/>
           <div><b>GSolve Pilot Implementation</b></div>
@@ -69,9 +70,9 @@ function ReqNormWorkspace({setMessage}:{setMessage:(m:string)=>void}) {
           <span className="proj-icon doc"><FileText size={16}/></span>
           <div><b>BRD Document</b><span>Daily Task Management BRD v1.0</span></div>
         </div>
-        <div className="proj-banner-mid proj-intake-status">
-          <div><span className="intake-label">◉ &nbsp;Intake Status</span><b><i className="status-dot"/>Submitted</b></div>
-          <span className="intake-date"><CalendarDays size={12}/>01 May 2026</span>
+        <div className="proj-banner-mid">
+          <span className="proj-status submitted">Submitted</span>
+          <div><b>Intake Status</b><span>📅 01 May 2026</span></div>
         </div>
         <div className="proj-banner-right">
           <ExternalLink size={14}/>
@@ -89,7 +90,7 @@ function ReqNormWorkspace({setMessage}:{setMessage:(m:string)=>void}) {
           </div>
           <div className="filter-tabs">
             {(['All','Unprocessed','In Review','Normalised','Needs Clarification'] as const).map(f=>{
-              const cnt=({All:36,Unprocessed:6,'In Review':8,Normalised:18,'Needs Clarification':4} as Record<string,number>)[f];
+              const cnt=f==='All'?SOURCE_CLAUSES.length:f==='Needs Clarification'?0:SOURCE_CLAUSES.filter(c=>c.status===f).length;
               return <button key={f} className={`ftab ${filt===f?'ftab-active':''}`} onClick={()=>setFilt(f)}>{f}  {cnt}</button>;
             })}
           </div>
@@ -184,7 +185,7 @@ function ReqNormWorkspace({setMessage}:{setMessage:(m:string)=>void}) {
           <div className="rail-card">
             <h3>REQUIREMENT TYPE BREAKDOWN</h3>
             <div className="type-breakdown">
-              {[{label:'Functional',count:20,icon:<Settings size={15}/>,color:'#078541'},{label:'Non-Functional',count:6,icon:<Gauge size={15}/>,color:'#2563eb'},{label:'Business Rule',count:4,icon:<FileText size={15}/>,color:'#7c3aed'},{label:'Integration',count:3,icon:<Workflow size={15}/>,color:'#0f9c9a'},{label:'Security',count:2,icon:<Shield size={15}/>,color:'#dc2626'},{label:'Reporting',count:1,icon:<BarChart3 size={15}/>,color:'#d89b16'}].map(({label,count,icon,color})=>(
+              {[{label:'Functional',count:20,icon:<LayoutGrid size={13}/>,color:'#078541'},{label:'Non-Functional',count:6,icon:<AlertCircle size={13}/>,color:'#50545b'},{label:'Business Rule',count:4,icon:<FileText size={13}/>,color:'#d89b16'},{label:'Integration',count:3,icon:<ArrowRight size={13}/>,color:'#0a9549'},{label:'Security',count:2,icon:<CheckCircle2 size={13}/>,color:'#dc2626'},{label:'Reporting',count:1,icon:<Edit3 size={13}/>,color:'#9333ea'}].map(({label,count,icon,color})=>(
                 <div key={label} className="type-row"><span className="type-ico" style={{color}}>{icon}</span><span className="type-label">{label}</span><b className="type-count">{count}</b></div>
               ))}
             </div>
@@ -232,16 +233,33 @@ function ReqNormWorkspace({setMessage}:{setMessage:(m:string)=>void}) {
 // ─── ROOT PAGE ────────────────────────────────────────────────────────────────
 export default function Home(){
  const {register,handleSubmit,watch,formState:{errors}}=useForm<FormData>({defaultValues:{title:'Daily Task Management System',description:'System to manage daily tasks, assignments, tracking and approvals.',notes:'This is part of GSolve pilot phase 1.',assignee:'UX-CX Lead (Jahir Hussain)'}});
- const [reviewers,setReviewers]=useState(['AI Architect (Zain Israr)','System Architect']); const [tags,setTags]=useState(['Task Management','Operations','GSolve Pilot']); const [tag,setTag]=useState(''); const [file,setFile]=useState('Daily_Task_Management_BRD_v1.0.pdf'); const [message,setMessage]=useState(''); const [activeStep,setActiveStep]=useState(1); const [activeNav,setActiveNav]=useState(2); const input=useRef<HTMLInputElement>(null);
+ const [reviewers,setReviewers]=useState(['AI Architect (Zain Israr)','System Architect']); const [tags,setTags]=useState(['Task Management','Operations','GSolve Pilot']); const [tag,setTag]=useState(''); const [file,setFile]=useState('Daily_Task_Management_BRD_v1.0.pdf'); const [message,setMessage]=useState(''); const [activeStep,setActiveStep]=useState(2); const [activeNav,setActiveNav]=useState(5); const input=useRef<HTMLInputElement>(null);
  const addTag=(e:React.KeyboardEvent<HTMLInputElement>)=>{if(e.key==='Enter'){e.preventDefault();const x=tag.trim();if(x&&!tags.some(t=>t.toLowerCase()===x.toLowerCase()))setTags([...tags,x]);setTag('')}};
  const choose=(f?:File)=>{if(!f)return;if(f.size>50*1024*1024||!/(pdf|vnd.openxmlformats-officedocument.wordprocessingml.document)$/.test(f.type))setMessage('Please choose a PDF or DOCX file under 50 MB.');else {setFile(f.name);setMessage('Document attached successfully.')}};
  const submit=(kind:string)=>handleSubmit((data)=>{const check=schema.safeParse(data);setMessage(check.success?`${kind} saved successfully.`:'Please complete all required fields.');})();
- return <div className="shell">
-  <aside className="sidebar"><div className="brand"><button className="hamb" aria-label="Open navigation"><I n="menu"/></button></div><div className="nav-scroll"><p className="group">BRD PIPELINE</p>{nav.map(([i,name],x)=><div key={name} role="button" tabIndex={0} onClick={()=>{setActiveNav(x); if(x===2)setActiveStep(1)}} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setActiveNav(x)}}} className={'nav '+(x===activeNav?'selected ':'')+(x>=2&&x<=4?'sub ':'') }><NavIcon name={i}/><span className="nav-label">{name}</span>{[0,1,5,6,7,8,9,10].includes(x)&&<ChevronDown className="nav-chevron" size={14}/>}</div>)}<div className="admin"><p className="group">ADMINISTRATION</p><div className="nav"><Settings className="nav-ico" size={18}/><span className="nav-label">Admin</span><ChevronDown className="nav-chevron" size={14}/></div><div className="nav"><BarChart3 className="nav-ico" size={18}/><span className="nav-label">Reports</span><ChevronDown className="nav-chevron" size={14}/></div></div></div><div className="side-bottom"><div className="context"><b>Project Context (GSolve)</b><span>GSOLVE-PILOT-001 <I n="ext"/></span></div><div className="profile"><div className="avatar">RS</div><div><b>Rohit Sharma</b><small>Business Analyst</small></div><ChevronDown size={14}/></div></div></aside>
-  <main className="app"><header><div><h1>GX1 – BRD to Production Platform</h1><p>{activeStep===1?'Requirement Normalisation Workbench':'From BRD Intake to Production-Ready Front-End & Evidence'}</p></div><div className="head-right"><span className="bell"><I n="bell"/><b>12</b></span><I n="help"/><div className="avatar large">RS</div><div><strong>Rohit Sharma</strong><small>Business Analyst</small></div><span>⌄</span><span className="gx-logo-badge">GREEN</span></div></header>
-   <div className="body"><nav className="stepper" aria-label="Workflow steps">{steps.map((s,i)=><div role="button" tabIndex={0} aria-current={i===activeStep?'step':undefined} onClick={()=>setActiveStep(i)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setActiveStep(i)}}} className={'step '+(i===activeStep?'current':'')} key={s}><span>{i+1}</span><b>{s}</b>{i<7&&<i>→</i>}</div>)}</nav>
+ 
+ const getHeaderSubtitle = () => {
+   if (activeStep === 1) return 'Requirement Normalisation Workbench';
+   if (activeStep === 2) return 'From BRD Intake to Production-Ready Front-End & Evidence';
+   return 'From BRD Intake to Production-Ready Front-End & Evidence';
+ };
 
-   {/* ── STEP 1: BRD Intake (original, untouched) ── */}
+ return <div className="shell">
+  <aside className="sidebar"><div className="brand"><button className="hamb" aria-label="Open navigation"><I n="menu"/></button><div><div className="logo">GX1</div><small>Platform</small></div></div><div className="nav-scroll"><p className="group">BRD PIPELINE <ChevronDown size={14}/></p>{nav.map(([i,name],x)=><div key={name} role="button" tabIndex={0} onClick={()=>{
+    setActiveNav(x);
+    if(x===0||x===1) setActiveStep(0);
+    if(x===2) setActiveStep(1);
+    if(x===5) setActiveStep(2);
+  }} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setActiveNav(x)}}} className={'nav '+(x===activeNav?'active selected ':'')+(x>=2&&x<=5?'sub ':'') }><NavIcon name={i}/><span className="nav-label">{name}</span>{[0,1,6,7,8,9,10].includes(x)&&<ChevronDown className="nav-chevron" size={14}/>}</div>)}<div className="admin"><p className="group">ADMINISTRATION</p><div className="nav"><Settings className="nav-ico" size={18}/><span className="nav-label">Admin</span><ChevronDown className="nav-chevron" size={14}/></div><div className="nav"><BarChart3 className="nav-ico" size={18}/><span className="nav-label">Reports</span><ChevronDown className="nav-chevron" size={14}/></div></div></div><div className="side-bottom"><div className="context"><b>Project Context (GSolve)</b><span>GSOLVE-PILOT-001 <I n="ext"/></span></div><div className="profile"><div className="avatar">RS</div><div><b>Rohit Sharma</b><small>Business Analyst</small></div><ChevronDown size={14}/></div></div></aside>
+  <main className="app"><header><div><h1>GX1 – BRD to Production Platform</h1><p>{getHeaderSubtitle()}</p></div><div className="head-right"><span className="bell"><I n="bell"/><b>12</b></span><I n="help"/><div className="avatar large">RS</div><div><strong>Rohit Sharma</strong><small>Business Analyst</small></div><span>⌄</span><div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginLeft: '4px' }}><span className="gx-logo-badge" style={{ margin: 0 }}>GREEN</span><span style={{ fontSize: '8px', color: '#078541', fontStyle: 'italic', fontWeight: 600 }}>Future: Envisioned</span></div></div></header>
+   <div className="body"><nav className="stepper" aria-label="Workflow steps">{steps.map((s,i)=><div role="button" tabIndex={0} aria-current={i===activeStep?'step':undefined} onClick={()=>{
+     setActiveStep(i);
+     if (i === 0) setActiveNav(0);
+     if (i === 1) setActiveNav(2);
+     if (i === 2) setActiveNav(5);
+   }} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setActiveStep(i)}}} className={'step '+(i===activeStep?'current':'')} key={s}><span>{i+1}</span><b>{s}</b>{i<7&&<i>→</i>}</div>)}</nav>
+
+   {/* ── STEP 1: BRD Intake ── */}
    {activeStep===0&&<div className="content"><div className="workspace"><div className="title"><h2>BRD Intake &amp; Registration</h2><p>Capture and register a new Business Requirement Document (BRD) against a GSolve project.</p></div><div className="notice"><I n="info"/> Project details and metadata are pulled from GSolve and cannot be edited here.</div>
     <Section title="1. &nbsp; PROJECT SELECTION  <small>(From GSolve)</small>" className="project"><button className="refresh" onClick={()=>{setMessage('Refreshing project data…');setTimeout(()=>setMessage('Project details refreshed from GSolve.'),700)}}><I n="refresh"/> Refresh from GSolve</button><Label required>Select GSolve Project</Label><select defaultValue="pilot"><option value="pilot">GSOLVE-PILOT-001 &nbsp; | &nbsp; GSolve Pilot Implementation</option></select><div className="summary"><div className="project-icon"><FileText size={18}/></div><Meta label="Project Code" value="GSOLVE-PILOT-001"/><Meta label="Project Name" value="GSolve Pilot Implementation"/><Meta label="Client" value="GREEN Limited"/><Meta label="Project Manager" value="Jahir Hussain"/><div className="meta"><span>Status</span><strong className="status">Active</strong></div></div><p className="metadata-title">Project Metadata (Read-only from GSolve)</p><div className="metadata">{[['Start Date','01 May 2026'],['Target End Date','31 Dec 2026'],['Currency','PGK'],['Project Type','Internal Development'],['Business Domain','Operations'],['Sub Domain','Task Management'],['Contract Reference','N/A'],['Budget (PGK)','250,000.00'],['Project Priority','High'],['Project Stage','Planning'],['Last Updated','20 Jul 2026 09:30 AM'],['Updated By','System (GSolve)']].map(([l,v])=><Meta key={l} label={l} value={v}/>)}</div></Section>
     <form onSubmit={e=>{e.preventDefault();submit('BRD')}} className="form-grid"><Section title="2. &nbsp; BRD INFORMATION"><Label required>BRD Title</Label><input {...register('title')} aria-invalid={!!errors.title}/><Label required>Short Description</Label><div className="counter-wrap"><textarea {...register('description')} maxLength={500}/><small>{watch('description').length} / 500</small></div></Section><Section title="3. &nbsp; DOCUMENT UPLOAD"><Label required>Upload BRD Document (PDF/DOCX)</Label><div className="drop" onDragOver={e=>e.preventDefault()} onDrop={e=>{e.preventDefault();choose(e.dataTransfer.files[0])}} onClick={()=>input.current?.click()}><I n="upload"/><b>Drag &amp; drop file here</b><span>or click to browse</span><input ref={input} type="file" accept=".pdf,.docx" onChange={e=>choose(e.target.files?.[0])}/></div>{file&&<div className="file"><span className="pdf">PDF</span><div><b>{file}</b><small>2.4 MB</small></div><I n="check"/><button aria-label="Remove file" onClick={()=>setFile('')}><I n="trash"/></button></div>}<p className="upload-note">Max file size: 50 MB <i/> Accepted formats: PDF, DOCX</p></Section>
@@ -252,10 +270,21 @@ export default function Home(){
    {/* ── STEP 2: Requirement Normalisation ── */}
    {activeStep===1&&<ReqNormWorkspace setMessage={setMessage}/>}
 
-   {/* ── STEPS 3-8: placeholder ── */}
-   {activeStep>1&&<div className="content"><div className="workspace"><div className="title"><h2>{steps[activeStep]}</h2><p>This step is coming soon.</p></div></div></div>}
+   {/* ── STEP 3: Layout & Component Recommendation ── */}
+   {activeStep===2&&(
+     <LayoutRecommendationWorkspace
+       onMsg={setMessage}
+       onNextStep={() => {
+         setActiveStep(3);
+         setMessage('Proceeding to Step 4: GX1 Screen Specification...');
+       }}
+     />
+   )}
+
+   {/* ── STEPS 4-8: placeholder ── */}
+   {activeStep>2&&<div className="content"><div className="workspace"><div className="title"><h2>{steps[activeStep]}</h2><p>This step is coming soon.</p></div></div></div>}
 
    </div>
-   <footer><span>GX1 Platform <i/> Confidential – Internal Use Only</span><b>Classification: Internal &amp; Confidential</b><div>{activeStep===1?<><button onClick={()=>setMessage('Returned to Intake Notes.')}>← Return to Intake Notes</button><button className="submit" onClick={()=>setMessage('Submitted for review.')}>Submit for Review &nbsp; →</button></>:<><button onClick={()=>submit('Draft')}><I n="save"/> Save as Draft</button><button className="submit" onClick={()=>submit('BRD')}>Submit for Processing &nbsp; →</button></>}</div><span>© GREEN Limited 2026. All rights reserved.</span></footer>{message&&<div role="status" className="toast">{message}<button onClick={()=>setMessage('')}>×</button></div>}</main></div>
+   <footer><span>GX1 Platform <i/> Confidential – Internal Use Only</span><b>Classification: Internal &amp; Confidential</b><div>{activeStep===1?<><button onClick={()=>setMessage('Returned to Intake Notes.')}>← Return to Intake Notes</button><button className="submit" onClick={()=>setMessage('Submitted for review.')}>Submit for Review &nbsp; →</button></>:activeStep===2?<><button onClick={()=>setActiveStep(1)}>← Previous Step</button><button className="submit" onClick={()=>{setMessage('Layout & Component recommendations confirmed!');setActiveStep(3);}}>Confirm &amp; Continue &nbsp; →</button></>:<><button onClick={()=>submit('Draft')}><I n="save"/> Save as Draft</button><button className="submit" onClick={()=>submit('BRD')}>Submit for Processing &nbsp; →</button></>}</div><span>© GREEN Limited 2026. All rights reserved.</span></footer>{message&&<div role="status" className="toast">{message}<button onClick={()=>setMessage('')}>×</button></div>}</main></div>
 }
 function Rail({title,rows,squared=false}:{title:string,rows:string[],squared?:boolean}){return <div className="rail-card"><h3>{title}</h3>{rows.map(x=><p key={x}><I n={squared?'document':'check'}/>{x}</p>)}</div>}
