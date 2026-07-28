@@ -40,7 +40,7 @@ export function LayoutRecommendationWorkspace({
         <ChevronRight size={12} />
         <span>BRD Pipeline</span>
         <ChevronRight size={12} />
-        <span>Layout &amp; Component Recommendation</span>
+        <span className="active">Layout &amp; Component Recommendation</span>
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>

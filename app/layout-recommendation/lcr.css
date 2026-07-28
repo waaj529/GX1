@@ -65,11 +65,15 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 10.5px;
-  color: #757b84;
-  margin-bottom: 6px;
+  font-size: 11px;
+  color: #50545b;
+  margin-top: 14px;
+  margin-bottom: 12px;
 }
 .lcr-breadcrumb span {
+  color: #50545b;
+}
+.lcr-breadcrumb span.active {
   color: #171717;
   font-weight: 500;
 }
