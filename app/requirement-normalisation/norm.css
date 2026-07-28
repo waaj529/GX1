@@ -1,0 +1,628 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Requirement Normalisation — scoped CSS
+   All shell styles (sidebar, header, stepper, footer, rail-card, toast…)
+   live in globals.css / overrides.css and are inherited automatically.
+   Only layout and components unique to Screen 2 live here.
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Project banner ─────────────────────────────────────────────────────── */
+.proj-banner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 7px 13px;
+  margin-bottom: 10px;
+  background: #fff;
+  border: 1px solid #e1e4e5;
+  border-radius: 5px;
+  font-size: 10px;
+  min-height: 42px;
+  flex-wrap: wrap;
+}
+.proj-banner-left,
+.proj-banner-mid {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-right: 16px;
+  margin-right: 16px;
+  border-right: 1px solid #e1e4e5;
+}
+.proj-banner-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: #50545b;
+  flex: 1;
+}
+.proj-banner-right .ico { width: 14px; height: 14px; flex: none; }
+.proj-banner small { line-height: 1.4; }
+.proj-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  background: #f7f9f8;
+  color: #4f565c;
+  flex: none;
+}
+.proj-icon.doc { background: #f7f9f8; color: #4f565c; }
+.proj-banner b, .proj-banner span { display: block; }
+.proj-banner b { font-size: 11px; font-weight: 600; }
+.proj-status {
+  padding: 3px 8px;
+  border-radius: 9px;
+  font-size: 10px;
+  font-weight: 600;
+  flex: none;
+}
+.proj-status.submitted { background: #e0f2e6; color: #08753b; }
+.proj-intake-status { gap:10px; }
+.proj-intake-status .intake-label { color:#5e666d; font-size:9px; margin-bottom:3px; }
+.proj-intake-status b { display:flex; align-items:center; gap:4px; color:#08753b; }
+.status-dot { width:6px; height:6px; border-radius:50%; background:#078541; display:inline-block; }
+.intake-date { display:flex !important; align-items:center; gap:4px; min-height:22px; padding:0 7px; border:1px solid #e0e4e3; border-radius:3px; color:#30363b; white-space:nowrap; }
+
+/* ── GREEN logo badge in header ─────────────────────────────────────────── */
+.gx-logo-badge {
+  font-size: 20px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -1px;
+  color: #078541;
+}
+
+/* ── Three-column main grid ──────────────────────────────────────────────── */
+.norm-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr) 255px;
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 10px;
+}
+
+/* ── Panel shared styles ────────────────────────────────────────────────── */
+.norm-panel { padding: 11px; }
+.panel-title {
+  font-size: 11px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: #171717;
+  text-transform: uppercase;
+}
+
+/* ── Source BRD Review ──────────────────────────────────────────────────── */
+.srch-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 7px;
+}
+.srch-wrap {
+  position: relative;
+  flex: 1;
+}
+.srch-ico {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ea3a8;
+  pointer-events: none;
+}
+.srch-inp {
+  width: 100%;
+  height: 27px;
+  padding: 0 8px 0 28px;
+  border: 1px solid #d7dbdd;
+  border-radius: 4px;
+  font-size: 11px;
+  background: #fff;
+}
+.icon-btn {
+  width: 27px;
+  height: 27px;
+  border: 1px solid #d7dbdd;
+  border-radius: 4px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  flex: none;
+  color: #50545b;
+}
+
+/* ── Filter tabs ────────────────────────────────────────────────────────── */
+.filter-tabs {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.ftab {
+  height: 22px;
+  padding: 0 8px;
+  border: 1px solid #d7dbdd;
+  border-radius: 3px;
+  background: #fff;
+  font-size: 10px;
+  color: #50545b;
+  white-space: nowrap;
+}
+.ftab-active {
+  background: #e8f5ec;
+  border-color: #a3cfb2;
+  color: #0a7e3e;
+  font-weight: 600;
+}
+
+/* ── Clause table ───────────────────────────────────────────────────────── */
+.clause-table { border: 1px solid #e1e4e5; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+.clause-thead,
+.clause-row {
+  display: grid;
+  grid-template-columns: 18fr 36fr 9fr 17fr 20fr;
+  gap: 4px;
+  padding: 5px 8px;
+  font-size: 10px;
+  align-items: center;
+}
+.clause-thead > span,
+.clause-row > span { min-width:0; }
+.clause-thead {
+  background: #f4f5f5;
+  border-bottom: 1px solid #e1e4e5;
+  font-weight: 600;
+  font-size: 10px;
+  color: #50545b;
+}
+.clause-row {
+  border-bottom: 1px solid #f0f2f2;
+  cursor: pointer;
+}
+.clause-row:last-child { border-bottom: none; }
+.clause-row:hover { background: #fafbfb; }
+.clause-selected { background: #edf7f0 !important; }
+.clause-radio { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 500; }
+.radio-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 1.5px solid #bfc4c7; flex: none; background: #fff;
+}
+.radio-active { border-color: #078541; background: #078541; box-shadow: inset 0 0 0 2.5px #fff; }
+.clause-stmt { font-size: 10px; color: #171717; line-height: 1.35; }
+
+/* ── Badges & pills ─────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 9.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-blue   { background: #dbeafe; color: #1d4ed8; }
+.badge-amber  { background: #fef3c7; color: #92400e; }
+.badge-purple { background: #ede9fe; color: #6d28d9; }
+.badge-green  { background: #dcfce7; color: #14532d; }
+
+.status-pill {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 9px;
+  font-size: 9.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.status-review  { background: #fef3c7; color: #92400e; }
+.status-norm    { background: #dcfce7; color: #14532d; }
+.status-unproc  { background: #f1f5f9; color: #64748b; }
+
+/* ── Clause detail card ─────────────────────────────────────────────────── */
+.clause-detail {
+  background: #f7f9f7;
+  border: 1px solid #e1e4e5;
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 10px;
+}
+.clause-detail-header {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 6px;
+  font-size: 10px;
+  color: #50545b;
+}
+.clause-text { margin: 0 0 4px; color: #50545b; }
+.clause-quote {
+  padding: 6px 9px;
+  background: #e8f2eb;
+  border-left: 3px solid #078541;
+  border-radius: 0 3px 3px 0;
+  font-size: 10px;
+  line-height: 1.4;
+  margin-bottom: 7px;
+  color: #171717;
+}
+.clause-keywords {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  font-size: 10px;
+  color: #50545b;
+}
+.kw-tag {
+  padding: 2px 6px;
+  background: #e0e5e2;
+  border-radius: 3px;
+  font-size: 9.5px;
+}
+.ai-suggest-btn {
+  height: 24px;
+  padding: 0 10px;
+  background: #f0faf4;
+  border: 1px solid #a3cfb2;
+  border-radius: 3px;
+  color: #0a7e3e;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 5px;
+}
+.ai-star { font-size: 12px; }
+.ai-note { margin: 0; color: #9ea3a8; font-size: 9.5px; }
+
+/* ── Normalised Requirement Form ────────────────────────────────────────── */
+.nf-row { display: grid; gap: 8px; margin-bottom: 8px; }
+.nf-row-2 { grid-template-columns: 1fr 1fr; }
+.nf-row-3 { grid-template-columns: 1fr 1fr 1fr; }
+.nf-label { display: block; font-size: 10px; margin-bottom: 3px; color: #50545b; }
+.nf-inp, .nf-sel {
+  width: 100%;
+  height: 27px;
+  padding: 0 8px;
+  border: 1px solid #d7dbdd;
+  border-radius: 4px;
+  font-size: 11px;
+  background: #fff;
+  color: #222;
+}
+.nf-inp[readonly] { background: #f4f5f5; color: #6e7277; }
+.nf-tags-row {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.req-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 3px;
+  font-size: 9.5px;
+  font-weight: 700;
+  border: none;
+  cursor: default;
+}
+.req-tag.trackable  { background: #dcfce7; color: #14532d; }
+.req-tag.testable   { background: #dbeafe; color: #1e40af; }
+.req-tag.unclassified { background: #fef3c7; color: #92400e; cursor: pointer; font-size: 9.5px; }
+.nf-counter-wrap { position: relative; }
+.nf-ta {
+  width: 100%;
+  height: 68px;
+  padding: 6px 8px;
+  border: 1px solid #d7dbdd;
+  border-radius: 4px;
+  font-size: 11px;
+  resize: vertical;
+  background: #fff;
+  color: #222;
+}
+.nf-ta-sm { height: 52px; }
+.nf-counter {
+  position: absolute;
+  right: 7px;
+  bottom: 5px;
+  font-size: 9px;
+  color: #9ea3a8;
+}
+
+/* ── Traceability sub-panel ─────────────────────────────────────────────── */
+.trace-section {
+  margin: 8px 0;
+  border: 1px solid #e1e4e5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.trace-title {
+  margin: 0;
+  padding: 5px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  background: #f4f5f5;
+  border-bottom: 1px solid #e1e4e5;
+  color: #171717;
+}
+.trace-thead, .trace-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 100px 120px;
+  gap: 4px;
+  padding: 5px 8px;
+  font-size: 10px;
+  align-items: center;
+}
+.trace-thead { background: #fafbfb; font-weight: 600; color: #50545b; border-bottom: 1px solid #e1e4e5; }
+.trace-conf { display: flex; align-items: center; gap: 6px; }
+.conf-bar { width: 52px; height: 5px; background: #e1e4e5; border-radius: 3px; overflow: hidden; flex: none; }
+.conf-fill { height: 100%; background: #078541; border-radius: 3px; display: block; }
+
+/* ── Form action buttons ────────────────────────────────────────────────── */
+.nf-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.nf-btn-draft, .nf-btn-flag, .nf-btn-dup, .nf-btn-ready {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 27px;
+  padding: 0 10px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1px solid;
+  white-space: nowrap;
+}
+.nf-btn-draft  { background: #fff;     border-color: #a8b8b0; color: #08753b; }
+.nf-btn-flag   { background: #fff;     border-color: #e0c070; color: #92400e; }
+.nf-btn-dup    { background: #fff;     border-color: #d9dde1; color: #50545b; }
+.nf-btn-ready  { background: linear-gradient(#0b8541,#006f35); border-color: #006f35; color: #fff; margin-left: auto; }
+
+/* ── Right rail — doc metadata card ────────────────────────────────────── */
+.doc-meta { display: flex; flex-direction: column; gap: 7px; }
+.doc-meta div { display: grid; grid-template-columns: 1fr auto; align-items: center; font-size: 10px; }
+.doc-meta span { color: #50545b; }
+.doc-meta b { font-size: 11px; text-align: right; }
+
+/* ── Quality donuts ─────────────────────────────────────────────────────── */
+.quality-donuts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.donut-wrap { display: flex; flex-direction: column; align-items: center; }
+.donut-svg { width: 62px; height: 62px; }
+.donut-pct { font-size: 15px; font-weight: 700; margin-top: -42px; margin-bottom: 30px; }
+.donut-label { font-size: 9px; text-align: center; color: #50545b; margin: 0; line-height: 1.3; }
+
+.quality-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  border-top: 1px solid #e1e4e5;
+  padding-top: 8px;
+  margin-top: 2px;
+}
+.q-stat { display: flex; flex-direction: column; font-size: 9.5px; }
+.q-stat span { color: #50545b; }
+.q-stat b { font-size: 13px; font-weight: 700; color: #171717; }
+
+/* ── Open Issues Register ───────────────────────────────────────────────── */
+.issue-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 7px;
+  font-size: 10px;
+}
+.issue-text { flex: 1; }
+.issue-ico { flex: none; }
+.issue-ico.high   { color: #dc2626; }
+.issue-ico.medium { color: #d89b16; }
+.issue-ico.low    { color: #50545b; }
+.issue-badge {
+  padding: 2px 6px;
+  border-radius: 9px;
+  font-size: 9px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.p-high   { background: #fee2e2; color: #dc2626; }
+.p-medium { background: #fef3c7; color: #92400e; }
+.p-low    { background: #f1f5f9; color: #64748b; }
+.view-all-btn {
+  width: 100%;
+  height: 24px;
+  border: 1px solid #e1e4e5;
+  border-radius: 3px;
+  background: #fafbfb;
+  font-size: 10px;
+  color: #0a7e3e;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ── Requirement Type Breakdown ─────────────────────────────────────────── */
+.type-breakdown { display: flex; flex-direction: column; gap: 5px; }
+.type-row { display: flex; align-items: center; gap: 7px; font-size: 10px; }
+.type-ico { display: flex; align-items: center; flex: none; }
+.type-label { flex: 1; }
+.type-count { font-weight: 700; }
+
+/* ── Actions panel ──────────────────────────────────────────────────────── */
+.actions-list { display: flex; flex-direction: column; gap: 5px; margin-bottom: 9px; }
+.action-item { display: flex; align-items: flex-start; gap: 6px; font-size: 10px; line-height: 1.35; }
+.action-ico.green { color: #078541; flex: none; }
+.action-ico.amber { color: #d89b16; flex: none; }
+.submit-review-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  height: 32px;
+  background: linear-gradient(#0b8541, #006f35);
+  border: 1px solid #006f35;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.return-btn {
+  width: 100%;
+  height: 29px;
+  border: 1px solid #d7dbdd;
+  border-radius: 4px;
+  background: #fff;
+  color: #50545b;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* ── Normalised Register Preview ────────────────────────────────────────── */
+.register-section { padding: 11px; margin-top: 0; }
+.register-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 9px;
+}
+.view-full-btn {
+  height: 24px;
+  padding: 0 10px;
+  border: 1px solid #a3cfb2;
+  border-radius: 3px;
+  background: #f0faf4;
+  color: #0a7e3e;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.reg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+.reg-table th {
+  background: #f4f5f5;
+  border: 1px solid #e1e4e5;
+  padding: 5px 8px;
+  text-align: left;
+  font-weight: 600;
+  color: #50545b;
+  white-space: nowrap;
+}
+.reg-table td {
+  border: 1px solid #f0f2f2;
+  padding: 5px 8px;
+  vertical-align: middle;
+}
+.reg-table tr:hover td { background: #fafbfb; }
+.reg-id { font-weight: 600; color: #0a7e3e; white-space: nowrap; }
+.reg-date { color: #6e7277; white-space: nowrap; }
+.trace-pct { color: #0a7e3e; font-weight: 600; font-size: 10px; }
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 1280px) {
+  .norm-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr) 240px; }
+}
+@media (max-width: 1100px) {
+  .norm-grid { grid-template-columns: 1fr; }
+  .quality-donuts { grid-template-columns: repeat(3,1fr); }
+}
+@media (max-width: 700px) {
+  .norm-grid { display: block; }
+  .nf-row-2, .nf-row-3, .clause-thead, .clause-row { grid-template-columns: 1fr; }
+  .proj-banner { flex-direction: column; align-items: flex-start; }
+}
+
+/* Keep the normalisation workspace on the compact desktop rhythm of Screen 2. */
+@media (min-width: 1101px) {
+  .proj-banner { min-height:64px; padding:7px 12px; margin-bottom:10px; font-size:9px; }
+  .proj-banner-left, .proj-banner-mid { gap:8px; padding-right:13px; margin-right:13px; }
+  .proj-banner b { font-size:9px; }
+  .proj-icon { width:30px; height:30px; }
+  .proj-icon svg { width:17px; height:17px; }
+  .proj-status { font-size:9px; padding:3px 7px; }
+  .proj-banner-right { gap:6px; font-size:9px; }
+  .proj-intake-status .intake-label { font-size:8px; }
+  .proj-intake-status b { font-size:9px; }
+  .intake-date { min-height:21px; padding:0 6px; font-size:8px; }
+  .norm-grid { grid-template-columns:minmax(0, 1fr) minmax(0, 1.24fr) 290px; gap:9px; margin-bottom:9px; }
+  /* The rail is visually adjacent to the work panels, but must not determine
+     their row height. This lets the register begin directly below the form. */
+  .norm-grid { position:relative; }
+  .norm-grid > .rail { position:absolute; top:0; right:0; width:290px; }
+  .register-section { margin-right:299px; }
+  .norm-panel, .register-section { padding:9px; }
+  .panel-title { font-size:10px; margin-bottom:8px; }
+  .srch-row { margin-bottom:6px; }
+  .srch-inp, .icon-btn { height:24px; font-size:9px; }
+  .icon-btn { width:24px; }
+  .filter-tabs { margin-bottom:7px; }
+  .ftab { height:20px; padding:0 7px; font-size:8.5px; }
+  .clause-thead, .clause-row { grid-template-columns:18fr 36fr 9fr 17fr 20fr; padding:5px 6px; font-size:8.5px; gap:3px; }
+  .clause-thead { font-size:8.5px; }
+  .clause-radio, .clause-stmt { font-size:8.5px; }
+  .radio-dot { width:11px; height:11px; }
+  .badge, .status-pill { font-size:8px; padding:2px 5px; }
+  .clause-detail { padding:7px 8px; font-size:8.5px; }
+  .clause-detail-header, .clause-keywords, .clause-quote { font-size:8.5px; }
+  .nf-row { gap:7px; margin-bottom:7px; }
+  .nf-label { font-size:8.5px; margin-bottom:2px; }
+  .nf-inp, .nf-sel { height:24px; padding:0 7px; font-size:9px; }
+  .req-tag { height:17px; padding:0 5px; font-size:7.5px; }
+  .nf-ta { height:53px; padding:5px 7px; font-size:9px; }
+  .nf-ta-sm { height:45px; }
+  .nf-counter { font-size:7.5px; }
+  .trace-section { margin:7px 0; }
+  .trace-title { padding:4px 7px; font-size:8.5px; }
+  .trace-thead, .trace-row { grid-template-columns:1fr 65px 85px 95px; padding:4px 7px; font-size:8px; }
+  .nf-actions { gap:5px; margin-top:7px; }
+  .nf-btn-draft, .nf-btn-flag, .nf-btn-dup, .nf-btn-ready { height:24px; padding:0 8px; font-size:8px; }
+  .rail-card { padding:10px; margin-bottom:9px; border-radius:4px; }
+  .doc-meta { gap:6px; }
+  .doc-meta div { font-size:8.5px; }
+  .doc-meta b { font-size:9px; }
+  .rail-card h3 { margin-bottom:9px; font-size:9px; }
+  .donut-svg { width:54px; height:54px; }
+  .donut-pct { font-size:12px; margin-top:-36px; margin-bottom:25px; }
+  .donut-label { font-size:8px; }
+  .quality-stats { padding-top:7px; }
+  .q-stat { font-size:8px; }
+  .q-stat b { font-size:11px; }
+  .issue-row, .type-row, .action-item { font-size:8px; margin-bottom:5px; }
+  .type-breakdown { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:5px; }
+  .type-row { display:grid; grid-template-columns:16px minmax(0, 1fr); grid-template-rows:auto auto; min-height:47px; margin:0; padding:6px; gap:0 5px; border:1px solid #e7ece9; border-radius:3px; align-items:start; }
+  .type-row .type-ico { grid-row:1 / span 2; padding-top:1px; }
+  .type-row .type-label { line-height:1.1; }
+  .type-row .type-count { grid-column:2; margin:3px 0 0; font-size:10px; }
+  .view-all-btn { height:19px; padding:0; border:0; background:transparent; text-align:right; font-size:8px; }
+  .issue-badge { font-size:7.5px; }
+  .submit-review-btn { height:28px; font-size:9px; margin-bottom:5px; }
+  .return-btn { height:26px; font-size:9px; }
+  .register-header { margin-bottom:7px; }
+  .view-full-btn { height:21px; font-size:8px; }
+  .reg-table { font-size:8px; }
+  .reg-table th, .reg-table td { padding:4px 6px; }
+}
+
+/* A 1280px desktop is still a desktop view.  Give the review table the room
+   it needs instead of letting its statement column collapse word-by-word. */
+@media (min-width: 1101px) and (max-width: 1350px) {
+  .norm-grid { grid-template-columns:minmax(360px, .95fr) minmax(430px, 1.15fr) 220px; }
+  .norm-grid > .rail { width:220px; }
+  .register-section { margin-right:229px; }
+  .clause-thead, .clause-row { grid-template-columns:18fr 36fr 9fr 17fr 20fr; }
+  .proj-banner-left, .proj-banner-mid { padding-right:8px; margin-right:8px; }
+  .proj-banner-right { min-width:160px; }
+}

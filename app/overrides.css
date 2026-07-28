@@ -83,6 +83,49 @@ textarea { height:69px; }
 }
 .project-icon svg { width:18px; height:18px; stroke-width:1.6; }
 .rail-card p .check, .rail-card p .document { color:#078541; stroke-width:1.5; flex:none; }
+
+/* Screen 2 uses the compact desktop application frame shown in the design. */
+@media (min-width: 1101px) {
+  .sidebar { width:200px; }
+  .brand { height:58px; padding:0 17px; gap:0; }
+  .brand > div { display:none; }
+  .nav-scroll { padding:12px 10px; }
+  .group { margin:0 7px 10px; font-size:9px; }
+  .nav { height:33px; margin:1px 0; padding:0 9px; gap:9px; border-radius:3px; font-size:10px; }
+  .nav.sub { height:29px; margin-left:6px; font-size:9.5px; }
+  .nav.selected { color:#08753b; background:#eaf5ed; }
+  .nav.active { background:transparent; color:#171717; }
+  .nav.selected .nav-ico { color:#078541; }
+  .nav .nav-label { font-size:inherit; }
+  .nav .nav-ico { width:15px; min-width:15px; height:15px; }
+  .nav .nav-chevron { width:12px; height:12px; }
+  .admin { margin:12px -10px 0; padding:12px 10px 0; }
+  .side-bottom { padding:9px 10px; }
+  .context, .profile { padding:10px; margin-bottom:8px; border-radius:4px; }
+  .context { font-size:10px; }
+  .context span { margin-top:9px; }
+  .profile { gap:7px; font-size:10px; }
+  .avatar { width:28px; height:28px; font-size:8px; }
+  .app { margin-left:200px; padding-top:58px; padding-bottom:42px; }
+  header { left:200px; height:58px; padding:0 14px; }
+  header h1 { font-size:13px; margin:0 0 4px; }
+  header p { font-size:9px; }
+  .head-right { gap:10px; font-size:9px; }
+  .head-right > .ico { width:17px; height:17px; }
+  .head-right strong { font-size:10px; }
+  .head-right small { font-size:9px; margin-top:2px; }
+  .avatar.large { width:28px; height:28px; }
+  .gx-logo-badge { margin-left:22px; font-size:19px; }
+  .body { padding:9px 11px 48px; }
+  .stepper { height:55px; }
+  .step { height:55px; gap:8px; padding-right:10px; font-size:8px; }
+  .step span { width:25px; height:25px; font-size:10px; }
+  .step b { line-height:12px; max-width:97px; }
+  .step i { font-size:13px; }
+  .step.current:after { width:100%; height:2px; }
+  footer { left:200px; height:42px; padding:0 14px; font-size:8px; }
+  footer button { height:27px; font-size:9px; padding:0 11px; }
+}
 .tag-notes .tag-input { flex-wrap:nowrap; overflow-x:auto; align-content:center; }
 .tag-notes .tag-input span { flex:none; white-space:nowrap; }
 .tag-notes .tag-input input { min-width:126px; flex:1 0 126px; }
@@ -213,4 +256,14 @@ textarea { height:69px; }
   .nav-scroll { padding-top:24px; padding-bottom:12px; }
   .nav { height:40px; }
   .side-bottom { padding-top:8px; }
+}
+
+/* GREEN italic logo badge in the top-right header */
+.gx-logo-badge {
+  font-size: 20px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -1px;
+  color: #078541;
+  margin-left: 4px;
 }
