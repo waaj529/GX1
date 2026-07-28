@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   Step 4: GX1 Screen Specification — Scoped Styles
+   Step 4: GX1 Screen Specification — Scoped Styles (Pixel Perfect)
 ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── 2x2 Panels Grid ─────────────────────────────────────────────────────── */
@@ -7,7 +7,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .spec-panel {
@@ -41,7 +41,7 @@
 
 .spec-table th {
   text-align: left;
-  padding: 5px 6px;
+  padding: 4px 6px;
   font-weight: 600;
   color: #50545b;
   border-bottom: 1px solid #e1e4e5;
@@ -50,20 +50,20 @@
 }
 
 .spec-table td {
-  padding: 5px 6px;
+  padding: 4.5px 6px;
   border-bottom: 1px solid #f0f2f2;
   vertical-align: middle;
-  line-height: 1.35;
+  line-height: 1.3;
 }
 
 .spec-num-col {
   color: #757b84;
-  width: 18px;
+  width: 16px;
 }
 
 .spec-font-mono {
-  font-family: monospace, sans-serif;
-  font-size: 10px;
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 9.5px;
   color: #171717;
   font-weight: 600;
 }
@@ -118,16 +118,16 @@
 
 /* ── Data Flow Diagram ───────────────────────────────────────────────────── */
 .spec-flow-container {
-  height: 220px;
+  flex: 1;
+  min-height: 240px;
   background: #fafbfb;
   border: 1px dashed #d7dbdd;
   border-radius: 4px;
-  padding: 12px;
+  padding: 14px 10px;
   margin-bottom: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
 .spec-flow-diagram {
@@ -137,50 +137,141 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
+  gap: 6px;
 }
 
-.spec-flow-node {
-  background: #fff;
-  border: 1px solid #d7dbdd;
-  border-radius: 4px;
-  padding: 6px 10px;
-  font-size: 9.5px;
-  font-weight: 600;
-  color: #171717;
+.spec-flow-node-db {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-  z-index: 2;
-}
-
-.spec-flow-node.highlight {
-  border: 1.5px solid #078541;
-  background: #e8f5ec;
-  color: #078541;
-}
-
-.spec-flow-db {
-  width: 48px;
-  height: 48px;
-  background: #fff;
-  border: 1px solid #078541;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 9px;
+  gap: 4px;
+  font-size: 9.5px;
   font-weight: 600;
   color: #078541;
+  text-align: center;
 }
 
-.spec-flow-arrows-svg {
-  position: absolute;
-  inset: 0;
+.spec-db-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1.5px solid #078541;
+  display: grid;
+  place-items: center;
+  color: #078541;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.spec-flow-connector {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-width: 50px;
+}
+
+.spec-connector-line {
   width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
+  height: 1px;
+  background: #a0aec0;
+  position: relative;
+}
+.spec-connector-line::before,
+.spec-connector-line::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+.spec-connector-line::before {
+  left: 0;
+  border-width: 3.5px 5px 3.5px 0;
+  border-color: transparent #a0aec0 transparent transparent;
+}
+.spec-connector-line::after {
+  right: 0;
+  border-width: 3.5px 0 3.5px 5px;
+  border-color: transparent transparent transparent #a0aec0;
+}
+
+.spec-connector-label {
+  font-size: 9px;
+  color: #4a5568;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 4px;
+  line-height: 1.2;
+}
+
+.spec-flow-center-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.spec-flow-node-sub {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 5px 8px;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #334155;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.spec-flow-node-sub small {
+  font-size: 8.5px;
+  color: #64748b;
+  font-weight: normal;
+}
+
+.spec-flow-node-main {
+  background: #e8f5ec;
+  border: 1.5px solid #078541;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 10px;
+  color: #078541;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(7, 133, 65, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.spec-flow-node-main strong {
+  font-weight: 700;
+  font-size: 10.5px;
+}
+.spec-flow-node-main span {
+  font-size: 9.5px;
+  font-weight: 600;
+}
+
+.spec-flow-arrow-vert {
+  width: 1px;
+  height: 12px;
+  background: #a0aec0;
+  position: relative;
+}
+.spec-flow-arrow-vert::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -3px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 3.5px 0 3.5px;
+  border-color: #a0aec0 transparent transparent transparent;
 }
 
 /* ── Right Rail Cards ────────────────────────────────────────────────────── */

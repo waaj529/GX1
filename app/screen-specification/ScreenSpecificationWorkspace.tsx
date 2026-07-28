@@ -223,28 +223,41 @@ export function ScreenSpecificationWorkspace({
 
             <div className="spec-flow-container">
               <div className="spec-flow-diagram">
-                {/* DB Node */}
-                <div className="spec-flow-db">
-                  <Database size={16} style={{ marginBottom: 2 }} />
-                  GSolve DB
+                {/* Left DB */}
+                <div className="spec-flow-node-db">
+                  <div className="spec-db-icon-wrap">
+                    <Database size={18} />
+                  </div>
+                  <span>GSolve Database</span>
                 </div>
 
-                {/* API Node */}
-                <div className="spec-flow-node">
-                  <span>API Layer</span>
-                  <small style={{ fontWeight: 'normal', color: '#757b84', fontSize: '8.5px' }}>(GSolve APIs)</small>
+                {/* Connector 1 */}
+                <div className="spec-flow-connector">
+                  <span className="spec-connector-line" />
+                  <span className="spec-connector-label">API Layer<br /><small style={{ fontWeight: 'normal', color: '#757b84' }}>(GSolve APIs)</small></span>
                 </div>
 
-                {/* Center Main Node */}
-                <div className="spec-flow-node highlight">
-                  <strong>GX1-S4</strong>
-                  <span>Task Dashboard</span>
+                {/* Center Column */}
+                <div className="spec-flow-center-col">
+                  <div className="spec-flow-node-sub">Authentication Service</div>
+                  <div className="spec-flow-arrow-vert" />
+                  <div className="spec-flow-node-main">
+                    <strong>GX1-S4</strong>
+                    <span>Task Dashboard</span>
+                  </div>
+                  <div className="spec-flow-arrow-vert" />
+                  <div className="spec-flow-node-sub">Notifications Service</div>
                 </div>
 
-                {/* UI Node */}
-                <div className="spec-flow-node">
+                {/* Connector 2 */}
+                <div className="spec-flow-connector">
+                  <span className="spec-connector-line" />
+                </div>
+
+                {/* Right UI Node */}
+                <div className="spec-flow-node-sub">
                   <span>UI Components</span>
-                  <small style={{ fontWeight: 'normal', color: '#757b84', fontSize: '8.5px' }}>(React / Mantine)</small>
+                  <small>(React / Mantine)</small>
                 </div>
               </div>
             </div>

@@ -245,7 +245,7 @@ export default function Home(){
  };
 
  return <div className="shell">
-  <aside className="sidebar"><div className="brand"><button className="hamb" aria-label="Open navigation"><I n="menu"/></button><div><div className="logo">GX1</div><small>Platform</small></div></div><div className="nav-scroll"><p className="group">BRD PIPELINE <ChevronDown size={14}/></p>{nav.map(([i,name],x)=><div key={name} role="button" tabIndex={0} onClick={()=>{
+  <aside className="sidebar"><div className="brand"><button className="hamb" aria-label="Open navigation"><I n="menu"/></button><div><div className="logo">GX1</div><small>Platform</small></div></div><div className="nav-scroll"><div className="nav" style={{ marginBottom: 12 }}><NavIcon name="intake"/><span className="nav-label">Dashboard</span></div><p className="group">BRD PIPELINE <ChevronDown size={14}/></p>{nav.map(([i,name],x)=><div key={name} role="button" tabIndex={0} onClick={()=>{
     setActiveNav(x);
     if(x===0||x===1) setActiveStep(0);
     if(x===2) setActiveStep(1);
