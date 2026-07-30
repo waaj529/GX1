@@ -557,12 +557,13 @@
   .proj-intake-status .intake-label { font-size:8px; }
   .proj-intake-status b { font-size:9px; }
   .intake-date { min-height:21px; padding:0 6px; font-size:8px; }
-  .norm-grid { grid-template-columns:minmax(0, 1fr) minmax(0, 1.24fr) 290px; gap:9px; margin-bottom:9px; }
-  /* The rail is visually adjacent to the work panels, but must not determine
-     their row height. This lets the register begin directly below the form. */
-  .norm-grid { position:relative; }
-  .norm-grid > .rail { position:absolute; top:0; right:0; width:290px; }
-  .register-section { margin-right:299px; }
+  /* The source keeps its long right rail independent of the workbench row.
+     Reserve its column in the grid, then anchor the rail inside that reserved
+     area. This prevents both card overlap and the blank vertical band that
+     occurs when the rail is allowed to set the grid row height. */
+  .norm-grid { grid-template-columns:484px minmax(0, 1fr); gap:12px; padding-right:344px; margin-bottom:10px; position:relative; }
+  .norm-grid > .rail { position:absolute; top:0; right:0; width:332px; min-width:0; }
+  .register-section { margin-right:344px; }
   .norm-panel, .register-section { padding:9px; }
   .panel-title { font-size:10px; margin-bottom:8px; }
   .srch-row { margin-bottom:6px; }

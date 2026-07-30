@@ -60,7 +60,7 @@ export function ScreenSpecificationWorkspace({
       </div>
 
       {/* ── Header Title & Actions ────────────────────────────────────────── */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+      <div className="spec-heading-row">
         <h2 style={{ fontSize: '20px', fontWeight: 700, margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
           GX1 Screen Specification
           <span className="lcr-header-badge">AI-Assisted</span>
@@ -256,14 +256,14 @@ export function ScreenSpecificationWorkspace({
                     <span>Service</span>
                   </div>
 
-                  <div className="spec-arrow-vertical">&updownarrow;</div>
+                  <div className="spec-arrow-vertical">↕</div>
 
                   <div className="spec-node-box main">
                     <strong>GX1-S4</strong>
                     <span>Task Dashboard</span>
                   </div>
 
-                  <div className="spec-arrow-vertical">&updownarrow;</div>
+                  <div className="spec-arrow-vertical">↕</div>
 
                   <div className="spec-node-box">
                     <strong>Notifications</strong>
@@ -272,7 +272,7 @@ export function ScreenSpecificationWorkspace({
                 </div>
 
                 {/* Arrow 3 */}
-                <div className="spec-arrow-horizontal">&leftrightarrow;</div>
+                <div className="spec-arrow-horizontal">↔</div>
 
                 {/* Box 3: UI Components */}
                 <div className="spec-node-box">

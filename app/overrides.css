@@ -103,48 +103,6 @@ textarea { height:69px; }
 .project-icon svg { width:18px; height:18px; stroke-width:1.6; }
 .rail-card p .check, .rail-card p .document { color:#078541; stroke-width:1.5; flex:none; }
 
-/* Screen 2 uses the compact desktop application frame shown in the design. */
-@media (min-width: 1101px) {
-  .sidebar { width:200px; }
-  .brand { height:58px; padding:0 17px; gap:0; }
-  .brand > div { display:none; }
-  .nav-scroll { padding:12px 10px; }
-  .group { margin:0 7px 10px; font-size:9px; }
-  .nav { height:33px; margin:1px 0; padding:0 9px; gap:9px; border-radius:3px; font-size:10px; }
-  .nav.sub { height:29px; margin-left:6px; font-size:9.5px; }
-  .nav.selected { color:#08753b; background:#eaf5ed; }
-  .nav.active { background:transparent; color:#171717; }
-  .nav.selected .nav-ico { color:#078541; }
-  .nav .nav-label { font-size:inherit; }
-  .nav .nav-ico { width:15px; min-width:15px; height:15px; }
-  .nav .nav-chevron { width:12px; height:12px; }
-  .admin { margin:12px -10px 0; padding:12px 10px 0; }
-  .side-bottom { padding:9px 10px; }
-  .context, .profile { padding:10px; margin-bottom:8px; border-radius:4px; }
-  .context { font-size:10px; }
-  .context span { margin-top:9px; }
-  .profile { gap:7px; font-size:10px; }
-  .avatar { width:28px; height:28px; font-size:8px; }
-  .app { margin-left:200px; padding-top:58px; padding-bottom:42px; }
-  header { left:200px; height:58px; padding:0 14px; }
-  header h1 { font-size:13px; margin:0 0 4px; }
-  header p { font-size:9px; }
-  .head-right { gap:10px; font-size:9px; }
-  .head-right > .ico { width:17px; height:17px; }
-  .head-right strong { font-size:10px; }
-  .head-right small { font-size:9px; margin-top:2px; }
-  .avatar.large { width:28px; height:28px; }
-  .gx-logo-badge { margin-left:22px; font-size:19px; }
-  .body { padding:9px 11px 48px; }
-  .stepper { height:55px; }
-  .step { height:55px; gap:8px; padding-right:10px; font-size:8px; }
-  .step span { width:25px; height:25px; font-size:10px; }
-  .step b { line-height:12px; max-width:97px; }
-  .step i { font-size:13px; }
-  .step.current:after { width:100%; height:2px; }
-  footer { left:200px; height:42px; padding:0 14px; font-size:8px; }
-  footer button { height:27px; font-size:9px; padding:0 11px; }
-}
 .tag-notes .tag-input { flex-wrap:nowrap; overflow-x:auto; align-content:center; }
 .tag-notes .tag-input span { flex:none; white-space:nowrap; }
 .tag-notes .tag-input input { min-width:126px; flex:1 0 126px; }
@@ -226,6 +184,54 @@ textarea { height:69px; }
   background-size:cover;
   background-repeat:no-repeat;
 }
+
+/* Screen 4 has its own branded shell in the supplied specification artwork. */
+@media (min-width:1101px) {
+  .screen-spec-shell .sidebar { width:194px; }
+  .screen-spec-shell .brand { height:78px; padding:0 22px; gap:24px; }
+  .screen-spec-shell .brand > div { display:block; }
+  .screen-spec-shell .brand .logo { font-size:34px; line-height:27px; }
+  .screen-spec-shell .brand small { display:block; font-size:10px; text-align:center; }
+  .screen-spec-shell .nav-scroll { padding:12px 10px; overflow:auto; }
+  .screen-spec-shell .nav-scroll > .nav:first-child {
+    height:33px;
+    margin:1px 0 12px;
+    padding:0 9px;
+    gap:9px;
+    border-radius:3px;
+    border-bottom:0;
+    font-size:11px;
+  }
+  .screen-spec-shell .side-bottom { display:block; }
+  .screen-spec-shell .app { margin-left:194px; padding-top:78px; }
+  .screen-spec-shell header { left:194px; height:78px; padding:0 16px; }
+  .screen-spec-shell header h1 { font-size:16px; margin-bottom:6px; }
+  .screen-spec-shell header p { font-size:11px; }
+  .screen-spec-shell .body { padding:0 23px 54px; }
+  .screen-spec-shell .lcr-summary-card { min-height:118px; }
+  .screen-spec-shell .stepper { height:78px; }
+  .screen-spec-shell .step { height:78px; font-size:9px; }
+  .screen-spec-shell .step span { width:31px; height:31px; font-size:11px; }
+  .screen-spec-shell .step b { line-height:14px; max-width:112px; }
+  .screen-spec-shell footer { left:0; height:50px; padding:0 24px; }
+}
+
+/* Screen 4 reflows at tablet widths.  Scaling a 1536px shell with transform
+   left its original layout width in the document, creating the horizontal
+   clipping shown in the reported viewport. */
+@media (min-width:701px) and (max-width:1100px) {
+  .screen-spec-shell { width:auto; transform:none; }
+  .screen-spec-shell .sidebar { width:64px; }
+  .screen-spec-shell .app { margin-left:64px; padding-top:78px; }
+  .screen-spec-shell header { left:64px; height:78px; }
+  .screen-spec-shell .body { padding:0 16px 54px; }
+  .screen-spec-shell .lcr-summary-card { min-height:0; }
+  .screen-spec-shell .lcr-content-grid { grid-template-columns:minmax(0, 1fr); gap:14px; }
+  .screen-spec-shell .spec-workspace-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .screen-spec-shell .rail { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; margin:0; }
+  .screen-spec-shell .rail-card { margin:0; }
+  .screen-spec-shell footer { left:64px; }
+}
 .tag-notes .tag-input span { padding-left:3px; padding-right:3px; }
 
 /* Compact workflow: stages must scroll, never shrink into each other. */
@@ -262,6 +268,31 @@ textarea { height:69px; }
   }
 }
 
+@media (max-width:700px) {
+  .screen-spec-shell .app { padding-top:70px; }
+  .screen-spec-shell header { left:0; height:70px; padding:0 10px; gap:8px; }
+  .screen-spec-shell header h1 { max-width:190px; margin:0; font-size:14px; line-height:1.15; }
+  .screen-spec-shell header p { display:none; }
+  .screen-spec-shell .head-right { gap:7px; }
+  .screen-spec-shell .head-right > .ico { width:17px; height:17px; }
+  .screen-spec-shell .head-right > div:nth-of-type(2),
+  .screen-spec-shell .head-right > div:last-of-type,
+  .screen-spec-shell .head-right > span:last-of-type { display:none; }
+  .screen-spec-shell .avatar.large { width:30px; height:30px; }
+  .screen-spec-shell .body { padding:0 10px 58px; }
+  .screen-spec-shell .stepper { height:66px; margin-bottom:8px; }
+  .screen-spec-shell .step { min-width:138px; height:58px; }
+  .screen-spec-shell .lcr-summary-card { flex-direction:column; align-items:stretch; gap:12px; padding:12px; }
+  .screen-spec-shell .lcr-summary-left { flex-direction:column; align-items:flex-start; gap:10px; }
+  .screen-spec-shell .lcr-summary-left,
+  .screen-spec-shell .lcr-summary-right { min-width:0; }
+  .screen-spec-shell .lcr-summary-meta { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .screen-spec-shell .lcr-summary-right { padding:10px 0 0; border:0; border-top:1px solid #e1e4e5; }
+  .screen-spec-shell .lcr-content-grid,
+  .screen-spec-shell .rail { display:block; }
+  .screen-spec-shell .rail-card { margin:10px 0 0; }
+}
+
 /* Wide desktop: use the extra width as real separation between stages. */
 @media (min-width:1600px) {
   .stepper { gap:8px; }
@@ -285,4 +316,43 @@ textarea { height:69px; }
   letter-spacing: -1px;
   color: #078541;
   margin-left: 4px;
+}
+
+/* Screen 2 uses the compact workbench shell from the approved 1672×941
+   frame. These values are deliberately scoped: other workbenches have a
+   taller header in their own Figma frame. */
+@media (min-width: 1101px) {
+  .screen-2 .sidebar { width:206px; }
+  .screen-2 .brand { height:52px; padding:0 18px; gap:20px; }
+  .screen-2 .brand .logo { font-size:29px; line-height:24px; }
+  .screen-2 .brand small { font-size:9px; }
+  .screen-2 .nav-scroll { padding:12px 10px; }
+  .screen-2 .side-bottom { padding:8px 10px; }
+  .screen-2 .app { margin-left:206px; padding-top:52px; }
+  .screen-2 header { left:206px; height:52px; padding:0 16px; }
+  .screen-2 header h1 { font-size:14px; margin:0 0 4px; }
+  .screen-2 header p { font-size:10px; }
+  .screen-2 .head-right { gap:10px; }
+  .screen-2 .head-right > .ico { width:18px; height:18px; }
+  .screen-2 .avatar.large { width:30px; height:30px; }
+  .screen-2 .body { padding:0 14px 50px; }
+  .screen-2 .stepper { height:76px; padding-bottom:8px; margin-bottom:0; }
+  .screen-2 .step { height:68px; font-size:9px; padding-right:10px; }
+  .screen-2 .step span { width:29px; height:29px; font-size:10px; }
+  .screen-2 .step b { line-height:13px; max-width:105px; }
+  .screen-2 footer { left:0; height:48px; padding:0 20px; }
+  .screen-2 .proj-banner { min-height:57px; }
+  .screen-2 .norm-panel { min-height:500px; }
+  /* The document metadata rail begins alongside the workflow in the source,
+     not beside the work panels. Its independent position keeps all five rail
+     cards inside the footer boundary without stretching the main grid. */
+  .screen-2 .norm-grid > .rail { top:-133px; }
+
+  /* Screens 5–8 use the Phase workbench shell from the approved references:
+     194px navigation, a 14px content gutter and a dedicated 270px rail. */
+  .screen-5 .sidebar, .screen-6 .sidebar, .screen-7 .sidebar, .screen-8 .sidebar { width:194px; }
+  .screen-5 .app, .screen-6 .app, .screen-7 .app, .screen-8 .app { margin-left:194px; }
+  .screen-5 header, .screen-6 header, .screen-7 header, .screen-8 header { left:194px; }
+  .screen-5 .body, .screen-6 .body, .screen-7 .body, .screen-8 .body { padding:0 14px 54px; }
+  .screen-5 footer, .screen-6 footer, .screen-7 footer, .screen-8 footer { left:0; }
 }

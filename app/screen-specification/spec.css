@@ -5,7 +5,7 @@
 /* ── 2x2 Panels Grid ─────────────────────────────────────────────────────── */
 .spec-workspace-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 14px;
   align-items: stretch;
 }
@@ -31,29 +31,43 @@
   gap: 6px;
 }
 
+.spec-heading-row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:4px;
+}
+
 /* ── Tables ──────────────────────────────────────────────────────────────── */
 .spec-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 10px;
+  font-size: 9px;
   margin-bottom: 12px;
+  table-layout: fixed;
 }
 
 .spec-table th {
   text-align: left;
-  padding: 6px 8px;
+  padding: 5px 7px;
   font-weight: 600;
   color: #50545b;
   border-bottom: 1px solid #e1e4e5;
   background: #fafbfb;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .spec-table td {
-  padding: 6px 8px;
+  padding: 4px 7px;
   border-bottom: 1px solid #f0f2f2;
   vertical-align: middle;
-  line-height: 1.35;
+  line-height: 1.2;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .spec-num-col {
@@ -265,4 +279,120 @@
 }
 .spec-action-item:hover {
   color: #078541;
+}
+
+/* Goal artwork: subtle cards with a clean, borderless diagram canvas. */
+.spec-panel {
+  border: 1px solid #e6ebe8;
+  border-radius: 5px;
+  box-shadow: none;
+  padding: 12px;
+  background: #fff;
+  min-width: 0;
+  overflow: hidden;
+}
+.spec-panel-title { margin: 0 0 9px; }
+.spec-table { margin-bottom: 8px; }
+.spec-table th { background: #fafcfb; border-bottom-color: #e6ebe8; }
+.spec-table td { border-bottom-color: #edf1ef; }
+.spec-flow-container {
+  min-height: 224px;
+  margin: 0 0 8px;
+  padding: 8px 6px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.spec-node-box { box-shadow: none; border-color: #dce3df; }
+.spec-panel-footer-btn { border-color: #c4d8cd; border-radius: 3px; }
+
+/* Fixed diagram tracks keep every node inside its panel at 1536px. */
+.spec-flow-canvas {
+  display: grid;
+  grid-template-columns: 70px 22px 96px 22px 108px 22px 98px;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.spec-flow-canvas > .spec-db-cylinder { grid-column: 1; }
+.spec-flow-canvas > .spec-arrow-horizontal:nth-child(2) { grid-column: 2; }
+.spec-flow-canvas > .spec-node-box:nth-child(3) { grid-column: 3; }
+.spec-flow-canvas > .spec-arrow-horizontal:nth-child(4) { grid-column: 4; }
+.spec-flow-canvas > .spec-center-stack { grid-column: 5; }
+.spec-flow-canvas > .spec-arrow-horizontal:nth-child(6) { grid-column: 6; }
+.spec-flow-canvas > .spec-node-box:nth-child(7) { grid-column: 7; }
+.spec-flow-canvas .spec-node-box {
+  min-width: 0;
+  width: 100%;
+  padding: 7px 5px;
+}
+.spec-flow-canvas .spec-node-box.main {
+  min-width: 0;
+  padding: 8px 5px;
+}
+.spec-flow-canvas .spec-arrow-horizontal { padding: 0; text-align: center; }
+
+/* Bounded table columns prevent long rules and examples escaping their card. */
+.spec-workspace-grid > .spec-panel:nth-child(1) .spec-table th:nth-child(1) { width:5%; }
+.spec-workspace-grid > .spec-panel:nth-child(1) .spec-table th:nth-child(2) { width:19%; }
+.spec-workspace-grid > .spec-panel:nth-child(1) .spec-table th:nth-child(3) { width:40%; }
+.spec-workspace-grid > .spec-panel:nth-child(1) .spec-table th:nth-child(4) { width:22%; }
+.spec-workspace-grid > .spec-panel:nth-child(1) .spec-table th:nth-child(5) { width:14%; }
+.spec-workspace-grid > .spec-panel:nth-child(1) .spec-table td:nth-child(5) { white-space:nowrap; }
+
+.spec-workspace-grid > .spec-panel:nth-child(3) .spec-table th:nth-child(1) { width:5%; }
+.spec-workspace-grid > .spec-panel:nth-child(3) .spec-table th:nth-child(2) { width:17%; }
+.spec-workspace-grid > .spec-panel:nth-child(3) .spec-table th:nth-child(3) { width:14%; }
+.spec-workspace-grid > .spec-panel:nth-child(3) .spec-table th:nth-child(4) { width:17%; }
+.spec-workspace-grid > .spec-panel:nth-child(3) .spec-table th:nth-child(5) { width:12%; }
+.spec-workspace-grid > .spec-panel:nth-child(3) .spec-table th:nth-child(6) { width:21%; }
+.spec-workspace-grid > .spec-panel:nth-child(3) .spec-table th:nth-child(7) { width:14%; }
+.spec-workspace-grid > .spec-panel:nth-child(3) .spec-table td:nth-child(7) {
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.spec-workspace-grid > .spec-panel:nth-child(4) .spec-table th:nth-child(1) { width:5%; }
+.spec-workspace-grid > .spec-panel:nth-child(4) .spec-table th:nth-child(2) { width:43%; }
+.spec-workspace-grid > .spec-panel:nth-child(4) .spec-table th:nth-child(3) { width:23%; }
+.spec-workspace-grid > .spec-panel:nth-child(4) .spec-table th:nth-child(4) { width:29%; }
+
+@media (max-width:1100px) {
+  .spec-flow-canvas {
+    grid-template-columns: 48px 14px 70px 14px 80px 14px 72px;
+  }
+  .spec-flow-canvas .spec-node-box { font-size:9px; }
+  .spec-flow-canvas .spec-node-box span,
+  .spec-flow-canvas .spec-node-box small { font-size:8px; }
+  .spec-flow-canvas .spec-node-box.main strong { font-size:10px; }
+  .spec-workspace-grid > .spec-panel:nth-child(1) .spec-table th:nth-child(2) { width:22%; }
+  .spec-workspace-grid > .spec-panel:nth-child(1) .spec-table th:nth-child(3) { width:38%; }
+  .spec-workspace-grid > .spec-panel:nth-child(1) .spec-table th:nth-child(4) { width:21%; }
+  .spec-workspace-grid > .spec-panel:nth-child(1) .spec-table th:nth-child(5) { width:14%; }
+  .spec-workspace-grid > .spec-panel:nth-child(1) .spec-table td:nth-child(2),
+  .spec-workspace-grid > .spec-panel:nth-child(3) .spec-table td:nth-child(2) {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    overflow-wrap:normal;
+  }
+  .spec-workspace-grid > .spec-panel:nth-child(3) .spec-table td:nth-child(7) {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    overflow-wrap:normal;
+  }
+}
+
+@media (max-width:700px) {
+  html, body { overflow-x:hidden; }
+  .spec-heading-row { align-items:flex-start; flex-direction:column; gap:8px; }
+  .spec-heading-row h2 { font-size:18px!important; }
+  .spec-heading-row .lcr-top-actions { width:100%; overflow-x:auto; padding-bottom:2px; }
+  .spec-workspace-grid { grid-template-columns:1fr; }
+  .spec-panel { padding:11px; }
+  .spec-flow-container { min-height:260px; overflow-x:auto; justify-content:flex-start; }
+  .spec-flow-canvas { min-width:520px; }
+  .spec-table { min-width:520px; }
+  .spec-panel:has(.spec-table) { overflow-x:auto; }
 }
