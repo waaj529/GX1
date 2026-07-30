@@ -10,6 +10,36 @@
   align-items: stretch;
 }
 
+/* Desktop source geometry for GX1-S4: the contextual rail begins alongside
+   the workflow/header and does not determine the main panel row height. */
+@media (min-width:1281px) {
+  /* The Figma screen reserves its right context column from the first
+     breadcrumb onward.  Keeping that reservation on the header, banner and
+     tabs prevents the rail from sitting on top of action controls. */
+  .screen-spec-shell .lcr-breadcrumb,
+  .screen-spec-shell .spec-heading-row,
+  .screen-spec-shell .lcr-subtitle-desc,
+  .screen-spec-shell .lcr-summary-card,
+  .screen-spec-shell .lcr-tabs-bar {
+    margin-right:282px;
+  }
+  .screen-spec-shell .lcr-content-grid {
+    position:relative;
+    grid-template-columns:minmax(0, 1fr);
+    padding-right:282px;
+  }
+  .screen-spec-shell .lcr-content-grid > .rail {
+    position:absolute;
+    top:-335px;
+    right:0;
+    width:266px;
+    margin:0;
+  }
+  .screen-spec-shell .spec-workspace-grid {
+    grid-template-rows:290px 222px;
+  }
+}
+
 .spec-panel {
   background: #fff;
   border: 1px solid #e1e4e5;
