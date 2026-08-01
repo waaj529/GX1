@@ -173,6 +173,13 @@ textarea { height:69px; }
 .project > select { margin-bottom:8px; }
 .summary { padding:11px 10px; }
 .metadata { gap:13px 6px; }
+
+/* Keep the two-line Layout & Component title on the same optical baseline
+   as the other two-line workflow labels. */
+@media (min-width:1101px) {
+  .shell .step.long-title b,
+  .screen-spec-shell .step.long-title b { padding-top:8px; }
+}
 .metadata-title { margin:10px 0 9px; }
 .form-grid { gap:6px; }
 .drop { height:75px; }
