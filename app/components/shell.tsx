@@ -58,10 +58,7 @@ export function Sidebar({
     <aside className="sidebar">
       <div className="brand">
         <button className="hamb" aria-label="Open navigation"><Ico n="menu" /></button>
-        <div>
-          <div className="logo">GX1</div>
-          <small>Platform</small>
-        </div>
+        <img className="brand-logo" src="/brand/gx1-logo.png" alt="GX1 Platform — AI-Driven Intelligence" />
       </div>
 
       <div className="nav-scroll">
