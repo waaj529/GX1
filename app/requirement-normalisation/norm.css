@@ -620,7 +620,10 @@
 /* A 1280px desktop is still a desktop view.  Give the review table the room
    it needs instead of letting its statement column collapse word-by-word. */
 @media (min-width: 1101px) and (max-width: 1350px) {
-  .norm-grid { grid-template-columns:minmax(360px, .95fr) minmax(430px, 1.15fr) 220px; }
+  .norm-grid {
+    grid-template-columns:minmax(330px, .95fr) minmax(390px, 1.15fr);
+    padding-right:229px;
+  }
   .norm-grid > .rail { width:220px; }
   .register-section { margin-right:229px; }
   .clause-thead, .clause-row { grid-template-columns:18fr 36fr 9fr 17fr 20fr; }

@@ -26,6 +26,94 @@
   margin-bottom:16px;
   position:relative;
 }
+
+/* Final desktop step-label normalization (must follow route-specific rules). */
+@media (min-width:1101px) {
+  .shell .step b,
+  .screen-spec-shell .step b {
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+    height:48px;
+    max-width:150px;
+    overflow:hidden;
+    line-height:16px;
+  }
+}
+
+/* Compact stepper: natural label height with horizontal scrolling. */
+@media (max-width:1100px) {
+  .shell .step b,
+  .screen-spec-shell .step b {
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    height:36px;
+    max-height:36px;
+    max-width:none;
+    overflow:hidden;
+    line-height:18px;
+  }
+  .shell .step,
+  .screen-spec-shell .step {
+    flex-basis:215px;
+    width:215px;
+    min-width:215px;
+    padding-right:28px;
+  }
+  .shell .step:nth-child(3),
+  .screen-spec-shell .step:nth-child(3) {
+    flex-basis:235px;
+    width:235px;
+    min-width:235px;
+  }
+  .shell .step i,
+  .screen-spec-shell .step i {
+    right:4px;
+    margin:0;
+  }
+}
+
+/* Center shorter desktop labels inside the shared three-line title slot. */
+@media (min-width:1101px) {
+  .shell .step:not(.long-title) b,
+  .screen-spec-shell .step:not(.long-title) b { padding-top:8px; }
+}
+@media (max-width:1100px) {
+  .shell .step b,
+  .screen-spec-shell .step b { padding-top:0; }
+}
+
+/* Align short two-line stage names to the same visual center as the
+   three-line Layout & Component title. */
+@media (min-width:1101px) {
+  .shell .step:not(.long-title) b,
+  .screen-spec-shell .step:not(.long-title) b {
+    padding-top:8px;
+  }
+}
+
+@media (max-width:1100px) {
+  .shell .step b,
+  .screen-spec-shell .step b {
+    padding-top:0;
+  }
+}
+
+/* Compact stepper: allow labels to size naturally while the workflow remains
+   horizontally scrollable. Fixed desktop label boxes create empty bands here. */
+@media (max-width:1100px) {
+  .shell .step b,
+  .screen-spec-shell .step b {
+    display:block;
+    height:auto;
+    max-height:none;
+    max-width:124px;
+    overflow:visible;
+    -webkit-line-clamp:unset;
+    line-height:18px;
+  }
+}
 .step {
   flex:1 1 0;
   width:0;
@@ -56,6 +144,15 @@
 .step:nth-child(7) { flex-grow:1.05; }
 .step:nth-child(8) { flex-grow:.92; padding-right:0; }
 .step b { max-width:132px; }
+.step b {
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  height:48px;
+  overflow:hidden;
+  line-height:16px;
+  max-width:150px;
+}
 .step i { position:absolute; right:1px; color:#555; font-size:15px; }
 .step:last-child i { display:none; }
 
@@ -268,6 +365,17 @@ textarea { height:69px; }
   }
 }
 
+/* Keep workflow labels optically aligned at desktop widths. The label box is
+   always the same height, even when a long stage name uses three lines. */
+@media (min-width:1101px) {
+  .shell .step b,
+  .screen-spec-shell .step b {
+    height:48px;
+    line-height:16px;
+    max-width:150px;
+  }
+}
+
 @media (max-width:700px) {
   .screen-spec-shell .app { padding-top:70px; }
   .screen-spec-shell header { left:0; height:70px; padding:0 10px; gap:8px; }
@@ -355,4 +463,132 @@ textarea { height:69px; }
   .screen-5 header, .screen-6 header, .screen-7 header, .screen-8 header { left:194px; }
   .screen-5 .body, .screen-6 .body, .screen-7 .body, .screen-8 .body { padding:0 14px 54px; }
   .screen-5 footer, .screen-6 footer, .screen-7 footer, .screen-8 footer { left:0; }
+}
+
+/* Keep the application chrome invariant while moving through the workflow.
+   Individual workspaces may use a denser internal layout, but changing the
+   sidebar/header/footer geometry between steps makes the whole viewport jump. */
+@media (min-width:1101px) {
+  .shell .sidebar {
+    width:220px;
+  }
+  .shell .brand,
+  .screen-spec-shell .brand {
+    height:78px;
+    padding:0 22px;
+    gap:35px;
+  }
+  .shell .brand .logo,
+  .screen-spec-shell .brand .logo {
+    font-size:40px;
+    line-height:32px;
+  }
+  .shell .brand small,
+  .screen-spec-shell .brand small {
+    font-size:12px;
+    text-align:left;
+  }
+  .shell .nav-scroll,
+  .screen-spec-shell .nav-scroll {
+    padding:26px 11px;
+  }
+  .shell .side-bottom,
+  .screen-spec-shell .side-bottom {
+    padding:10px 11px;
+  }
+  .shell .app,
+  .screen-spec-shell .app {
+    margin-left:220px;
+    padding-top:78px;
+  }
+  .shell header,
+  .screen-spec-shell header {
+    left:220px;
+    height:78px;
+    padding:0 23px;
+  }
+  .shell header h1,
+  .screen-spec-shell header h1 {
+    margin:0 0 8px;
+    font-size:16px;
+  }
+  .shell header p,
+  .screen-spec-shell header p {
+    font-size:12px;
+  }
+  .shell .head-right {
+    gap:13px;
+  }
+  .shell .head-right > .ico {
+    width:22px;
+    height:22px;
+  }
+  .shell .avatar.large {
+    width:38px;
+    height:38px;
+  }
+  .shell .body,
+  .screen-spec-shell .body {
+    padding:17px 21px 54px 22px;
+  }
+  .shell .stepper,
+  .screen-spec-shell .stepper {
+    height:58px;
+    padding-bottom:10px;
+    margin-bottom:16px;
+  }
+  .shell .step,
+  .screen-spec-shell .step {
+    height:58px;
+    padding-right:12px;
+    font-size:10px;
+  }
+  .shell .step span,
+  .screen-spec-shell .step span {
+    width:30px;
+    height:30px;
+    font-size:12px;
+  }
+  .shell .step b,
+  .screen-spec-shell .step b {
+    max-width:132px;
+    line-height:18px;
+  }
+  .shell footer,
+  .screen-spec-shell footer {
+    left:220px;
+    height:38px;
+    padding:0 23px;
+  }
+  .screen-2 .norm-grid > .rail {
+    top:0;
+  }
+}
+
+/* Final desktop step-label normalization (after route-specific rules). */
+@media (min-width:1101px) {
+  .shell .step b,
+  .screen-spec-shell .step b {
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+    height:48px;
+    max-width:150px;
+    overflow:hidden;
+    line-height:16px;
+  }
+}
+
+/* Compact stepper: natural label height with horizontal scrolling. */
+@media (max-width:1100px) {
+  .shell .step b,
+  .screen-spec-shell .step b {
+    display:block;
+    height:auto;
+    max-height:none;
+    max-width:124px;
+    overflow:visible;
+    -webkit-line-clamp:unset;
+    line-height:18px;
+  }
 }

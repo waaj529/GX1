@@ -268,7 +268,7 @@ export default function Home(){
      if (i === 5) setActiveNav(8);
      if (i === 6) setActiveNav(9);
      if (i === 7) setActiveNav(10);
-   }} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setActiveStep(i)}}} className={'step '+(i===activeStep?'current':i<activeStep?'completed':'')} key={s}><span>{i<activeStep?<Check size={14} strokeWidth={2.5}/>:i+1}</span><b>{s}</b>{i<7&&<i>→</i>}</div>)}</nav>
+   }} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setActiveStep(i)}}} className={'step '+(i===activeStep?'current ':i<activeStep?'completed ':'')+(i===2?'long-title':'')} key={s}><span>{i<activeStep?<Check size={14} strokeWidth={2.5}/>:i+1}</span><b>{s}</b>{i<7&&<i>→</i>}</div>)}</nav>
 
    {/* ── STEP 1: BRD Intake ── */}
    {activeStep===0&&<div className="content"><div className="workspace"><div className="title"><h2>BRD Intake &amp; Registration</h2><p>Capture and register a new Business Requirement Document (BRD) against a GSolve project.</p></div><div className="notice"><I n="info"/> Project details and metadata are pulled from GSolve and cannot be edited here.</div>
