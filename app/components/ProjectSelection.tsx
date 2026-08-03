@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { ProjectListResponseSchema, type Project } from '../lib/gsolve';
 
 type LoadState = 'loading' | 'error' | 'success';
-export function ProjectSelection({ onMessage }: { onMessage: (message: string) => void }) {
+export function ProjectSelection({ onMessage, onProjectChange }: { onMessage: (message: string) => void; onProjectChange?: (project: Project | undefined) => void }) {
   const [projects, setProjects] = useState<Project[]>([]); const [selectedId, setSelectedId] = useState<number | null>(null);
   const [state, setState] = useState<LoadState>('loading'); const [error, setError] = useState('');
   const loadProjects = useCallback(async (force = false) => {
@@ -16,7 +16,7 @@ export function ProjectSelection({ onMessage }: { onMessage: (message: string) =
       const parsed = ProjectListResponseSchema.safeParse(raw);
       if (!parsed.success || parsed.data.status_code !== 200 || parsed.data.data.code !== '001') throw new Error('Project data could not be verified. Please try again.');
       const list = parsed.data.data.project_list;
-      setProjects(list); setSelectedId(current => list.some(project => project.id === current) ? current : (list[0]?.id ?? null)); setState('success');
+      setProjects(list); setSelectedId(current => list.some(project => project.id === current) ? current : (list[0]?.id ?? null)); setState('success'); onProjectChange?.(list[0]);
       if (force) onMessage('Project details refreshed from GSolve.');
     } catch (cause) { setState('error'); setError(cause instanceof Error ? cause.message : 'Unable to load projects.'); }
   }, [onMessage]);
@@ -30,7 +30,7 @@ export function ProjectSelection({ onMessage }: { onMessage: (message: string) =
     {state === 'success' && projects.length === 0 && <p className="project-feedback">No GSolve projects are available.</p>}
     {state === 'success' && project && <>
       <label>Select GSolve Project <b className="required">*</b></label>
-      <select value={String(project.id)} onChange={event => setSelectedId(Number(event.target.value))}>{projects.map(item => <option key={item.id} value={item.id}>{item.project_code} | {item.project_name}</option>)}</select>
+      <select value={String(project.id)} onChange={event => { const next = projects.find(item => item.id === Number(event.target.value)); setSelectedId(next?.id ?? null); onProjectChange?.(next); }}>{projects.map(item => <option key={item.id} value={item.id}>{item.project_code} | {item.project_name}</option>)}</select>
       <div className="summary"><div className="project-icon"><FileText size={18} /></div><ProjectMeta label="Project Code" value={project.project_code} /><ProjectMeta label="Project Name" value={project.project_name} /><ProjectMeta label="Client" value={project.customer} /><ProjectMeta label="Project Manager" value={project.manager} /><div className="meta"><span>Status</span><strong className="status">{project.project_status}</strong></div></div>
       <p className="metadata-title">Project Metadata (Read-only from GSolve)</p>
       <div className="metadata"><ProjectMeta label="Start Date" value={project.start_date} /><ProjectMeta label="Target End Date" value={project.target_end_date} /><ProjectMeta label="Currency" value={project.currency_name} /><ProjectMeta label="Project Type" value={project.project_type} /><ProjectMeta label="Business Domain" value={project.business_domain} /><ProjectMeta label="Sub Domain" value={project.sub_domain} /><ProjectMeta label="Contract Reference" value={project.contract_reference} /><ProjectMeta label={`Budget (${project.currency_name})`} value={project.budget} /><ProjectMeta label="Project Priority" value={project.priority} /><ProjectMeta label="Last Updated" value={project.last_updated} /><ProjectMeta label="Updated By" value={project.updated_by} /></div>
