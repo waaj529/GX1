@@ -15,7 +15,15 @@ export async function POST(request: Request) {
       headers: { Accept: 'application/json' },
       cache: 'no-store',
     });
-    const payload: unknown = await upstream.json().catch(() => ({ message: 'Invalid response from BRD service.' }));
+    let payload: unknown;
+    try {
+      payload = await upstream.json();
+    } catch {
+      return NextResponse.json(
+        { message: 'Invalid response from BRD service.' },
+        { status: 502 },
+      );
+    }
     if (!upstream.ok) {
       console.error('BRD submission upstream failure', { status: upstream.status, payload });
       return NextResponse.json({ message: 'BRD submission failed.', details: payload }, { status: upstream.status >= 400 && upstream.status < 500 ? upstream.status : 502 });
